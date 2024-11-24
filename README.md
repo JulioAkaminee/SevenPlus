@@ -1,4 +1,4 @@
-# Streaming de Filmes - Projeto Estudantil
+# Streaming de Filmes SevenPlus - Projeto Estudantil
 
 Este é um projeto de **streaming de filmes** criado com **React Native** (para o front-end mobile), **Node.js** (para o back-end), e **MySQL** (para o banco de dados). O objetivo do projeto é criar uma aplicação onde os usuários podem assistir a filmes, navegar por categorias e buscar filmes com base em um banco de dados de filmes.
 
