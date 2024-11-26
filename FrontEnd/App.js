@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from './src/pages/login';
 import ForgetPassword from './src/pages/forgetPassword'
 import Register from './src/pages/register'
+import Home from './src/pages/home'
 
 
 const Stack = createStackNavigator();
@@ -27,6 +28,13 @@ export default function App() {
          <Stack.Screen 
           name="Cadastro" 
           component={Register} 
+          options={{ headerShown: false }} 
+         
+        />
+
+<Stack.Screen 
+          name="Home" 
+          component={Home} 
           options={{ headerShown: false }} 
          
         />

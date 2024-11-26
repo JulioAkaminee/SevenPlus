@@ -47,11 +47,14 @@ const styles = StyleSheet.create({
       marginTop: 20,
       padding: 15,
       borderRadius: 5,
+      
+  
     },
     btnEntrar: {
       textAlign: 'center',
       color: 'white',
       fontFamily: 'MemoirDisplay',
+      width: 270
 
     },
     footerContainer: {

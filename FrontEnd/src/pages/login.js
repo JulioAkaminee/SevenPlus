@@ -1,54 +1,69 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StatusBar, Image, TextInput, TouchableOpacity, StyleSheet, ImageBackground, SafeAreaView } from 'react-native';
-import fundoSevenPlus from '../../assets/images/fundoSevenPlus.png';
-import logoSevenPLus from '../../assets/images/logoSevenPlus.png';
-import styles from '../styles/loginStyle';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  Image,
+  ImageBackground,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Font from 'expo-font';
-import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import fundoSevenPlus from '../../assets/images/fundoSevenPlus.png';
+import logoSevenPlus from '../../assets/images/logoSevenPlus.png';
+import styles from '../styles/loginStyle';
 
 export default function Login({ navigation }) {
-  // Carregando a fonte MemoirDisplay
   const [fontCarregada, setFontCarregada] = useState(false);
   const [esconderSenha, setEsconderSenha] = useState(true);
-  const [textInputSenha, setTextInputSenha] = useState('');
-  const [textInputEmail, setTextInputEmail] = useState('');
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
 
-
-  // Função para verificar o campo de entrada
-  const verificarInputSenha = () => {
-    if (textInputSenha === '') {
-      alert('O campo de entrada está vazio');
-    } 
-
-    if(textInputSenha === '123' && textInputEmail === 'admin@admin.com'){
-      alert('login feito com sucesso')
-      //Tempo para ir para a página home
-      setTimeout(() => {
-        navigation.navigate('Cadastro');
-      }, 1000);
-    }else{
-      alert('login ou senha incorretos')
-    }
-  };
-
-  // Função para atualizar o valor do textInput
-  const textoDigitadoSenha = (inputTextSenha) => {
-    setTextInputSenha(inputTextSenha);
-  };
-
-  const textoDigitadoEmail = (inputTextEmail) => {
-    setTextInputEmail(inputTextEmail);
-  };
-
-  // instalando a minha fonte personalizada
+  // Carrega a fonte personalizada
   useEffect(() => {
     Font.loadAsync({
       'MemoirDisplay': require('../../assets/fonts/Memoir Display.ttf'),
     }).then(() => setFontCarregada(true));
   }, []);
 
-  // Caso a fonte não seja carregada, exibe a mensagem
+  const realizarLogin = async () => {
+    if (!email || !senha) {
+      Alert.alert('Erro', 'Preencha todos os campos.');
+      return;
+    }
+
+    try {
+      const response = await fetch('http://10.0.0.179:3008/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, senha }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+
+        await AsyncStorage.setItem('@userToken', data.token);
+        Alert.alert('Sucesso', 'Login realizado com sucesso!');
+        setTimeout(() => {
+          
+          navigation.navigate('Cadastro'); // Redireciona para a página Home
+        }, 1000);
+      } else {
+        Alert.alert('Erro', data.error || 'Erro ao realizar login.');
+      }
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Erro', 'Não foi possível conectar ao servidor.');
+    }
+  };
+
   if (!fontCarregada) {
     return <Text>Carregando fonte...</Text>;
   }
@@ -57,40 +72,46 @@ export default function Login({ navigation }) {
     <SafeAreaView style={styles.container}>
       {/* Imagem de fundo */}
       <ImageBackground style={styles.background} source={fundoSevenPlus}>
-  
-
         {/* Formulário de login */}
         <View style={styles.formContainer}>
-          <Image source={logoSevenPLus} style={styles.logo} />
+          <Image source={logoSevenPlus} style={styles.logo} />
           <View style={styles.containerInput}>
             <Text style={styles.labelInput}>Email</Text>
-            <TextInput 
-              style={styles.inputTexto} 
+            <TextInput
+              style={styles.inputTexto}
               placeholder="Digite seu email"
-              onChangeText={textoDigitadoEmail} 
+              onChangeText={(text) => setEmail(text)}
+              value={email}
             />
           </View>
 
           <View style={styles.containerInput}>
             <Text style={styles.labelInput}>Senha</Text>
             <View style={styles.inputArea}>
-              <TextInput 
-                secureTextEntry={esconderSenha} 
-                style={styles.inputTexto} 
+              <TextInput
+                secureTextEntry={esconderSenha}
+                style={styles.inputTexto}
                 placeholder="Digite sua senha"
-                onChangeText={textoDigitadoSenha} 
+                onChangeText={(text) => setSenha(text)}
+                value={senha}
               />
               <TouchableOpacity onPress={() => setEsconderSenha(!esconderSenha)}>
                 <Icon style={styles.icon} name="visibility" size={30} color="white" />
               </TouchableOpacity>
             </View>
-            <TouchableOpacity style={styles.containerBtnEntrar} onPress={verificarInputSenha}>
-              <Text style={styles.btnEntrar}>ENTRAR</Text>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Text style={styles.forgetPassword} onPress={() => navigation.navigate('Esqueci-senha')}>Esqueci a senha</Text>
-            </TouchableOpacity>
           </View>
+
+          <TouchableOpacity style={styles.containerBtnEntrar} onPress={realizarLogin}>
+            <Text style={styles.btnEntrar}>ENTRAR</Text>
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Text
+              style={styles.forgetPassword}
+              onPress={() => navigation.navigate('Esqueci-senha')}
+            >
+              Esqueci a senha
+            </Text>
+          </TouchableOpacity>
         </View>
 
         {/* Footer */}
