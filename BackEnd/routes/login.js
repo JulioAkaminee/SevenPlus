@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
 
     // Gerando o token de autenticação
     const token = jwt.sign({ id: user.id, email: user.email }, secretKey, {
-      expiresIn: '1h',
+      expiresIn: '3h',
     });
 
     res.status(200).json({ message: 'Login realizado com sucesso!', token });

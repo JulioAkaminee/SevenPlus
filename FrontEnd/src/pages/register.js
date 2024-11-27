@@ -36,7 +36,7 @@ export default function Register({ navigation }) {
     }
 
     try {
-      const response = await fetch('http://10.0.0.179:3008/register', {
+      const response = await fetch('http://10.24.83.26:3010/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

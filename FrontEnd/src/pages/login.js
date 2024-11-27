@@ -37,7 +37,7 @@ export default function Login({ navigation }) {
     }
 
     try {
-      const response = await fetch('http://10.0.0.179:3008/login', {
+      const response = await fetch('http://10.24.83.26:3010/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ export default function Login({ navigation }) {
         Alert.alert('Sucesso', 'Login realizado com sucesso!');
         setTimeout(() => {
           
-          navigation.navigate('Cadastro'); // Redireciona para a página Home
+          navigation.navigate('Home'); // Redireciona para a página Home
         }, 1000);
       } else {
         Alert.alert('Erro', data.error || 'Erro ao realizar login.');

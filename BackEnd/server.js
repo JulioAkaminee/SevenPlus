@@ -16,6 +16,6 @@ app.use('/login', loginRouter);
 
 
 // Iniciar o servidor
-app.listen(3008, () => {
+app.listen(3010, () => {
   console.log('Servidor rodando na porta 3008');
 });
