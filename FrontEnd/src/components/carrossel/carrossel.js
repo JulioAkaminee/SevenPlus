@@ -1,99 +1,47 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Dimensions, Image, FlatList } from 'react-native';
+import React from 'react';
+import { View, Text, Image, Dimensions, StyleSheet } from 'react-native';
+import Swiper from 'react-native-swiper';
 
-const { width, height } = Dimensions.get('window'); // Largura e altura da tela
-
-// Dados do carrossel
-const data = [
-  {
-    title: 'Item 1',
-    imageUrl: 'https://cdn.awsli.com.br/600x700/1610/1610163/produto/177685212/poster-os-vingadores-ultimato-a-242769bd.jpg',
-  },
-  {
-    title: 'Item 2',
-    imageUrl: 'https://http2.mlstatic.com/D_NQ_NP_875618-MLB51652225285_092022-O.webp',
-  },
-  {
-    title: 'Item 3',
-    imageUrl: 'https://http2.mlstatic.com/D_NQ_NP_875618-MLB51652225285_092022-O.webp',
-  },
-];
+const { width } = Dimensions.get('window');
 
 const Carrossel = () => {
-  const [currentIndex, setCurrentIndex] = useState(0); // Índice do item atual
-
-  useEffect(() => {
-    // Define o intervalo de tempo para mudar o índice
-    const intervalId = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % data.length); // Avança para o próximo item
-    }, 3000); // Intervalo de 3 segundos (3000ms)
-
-    // Limpa o intervalo quando o componente for desmontado
-    return () => clearInterval(intervalId);
-  }, []);
-
-  // Função para renderizar cada item
-  const renderItem = ({ item, index }) => {
-    return (
-      <View style={styles.slide}>
-        <Image source={{ uri: item.imageUrl }} style={styles.image} />
-        <Text style={styles.title}>{item.title}</Text>
-      </View>
-    );
-  };
+  const data = [
+    { id: '1', imageUrl: 'https://pbs.twimg.com/media/FywYsv7XoAA8ebe.jpg:large' },
+    { id: '2', imageUrl: 'https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/1F8EB623545FF22EE45B5EC8060B1977FD8132AC91D9EE7E9F56BFEBBE839641/scale?width=1200&aspectRatio=1.78&format=webp' },
+    { id: '3', imageUrl: 'https://anatomiapop.com/wp-content/uploads/2018/08/Para-Todos-os-Garotos-que-J%C3%A1-Amei.jpg' },
+    { id: '4', imageUrl: 'https://www.setelagoasnoticias.com.br/sig/www/openged/conteudos/16632/016632_6467dfe8bbe46_Copia_de_Copia_de_Imagem_Site_20230519T174518902.jpg?limite=1&w=760&h=500' },
+  
+  ];
 
   return (
     <View style={styles.container}>
-      {/* Componente FlatList para renderizar os itens do carrossel */}
-      <FlatList
-        data={data}
-        horizontal
-        pagingEnabled // Faz o carrossel "pular" de um item para o outro
-        showsHorizontalScrollIndicator={false} // Esconde o indicador de rolagem
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={renderItem}
-        extraData={currentIndex}
-        onMomentumScrollEnd={(e) => {
-          const contentOffsetX = e.nativeEvent.contentOffset.x;
-          const newIndex = Math.floor(contentOffsetX / width);
-          setCurrentIndex(newIndex); // Atualiza o índice do item atual
-        }}
-        initialScrollIndex={currentIndex} // Inicia o carrossel no índice atual
-        // Atualiza a posição da rolagem automaticamente
-        getItemLayout={(data, index) => ({
-          length: width,
-          offset: width * index,
-          index,
-        })}
-      />
+      <Swiper autoplay={true} autoplayTimeout={3} showsPagination={true}>
+        {data.map((item) => (
+          <View key={item.id} style={styles.itemContainer}>
+            <Image source={{ uri: item.imageUrl }} style={styles.image} />
+          </View>
+        ))}
+      </Swiper>
     </View>
   );
 };
 
-// Estilos
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 50, // Ajuste conforme necessário
+    height:245
   },
-  slide: {
+  itemContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 10,
-    height: height * 0.5, // Definindo altura do carrossel
-    width: width, // Largura igual à largura da tela
-    elevation: 5, // Sombra no card
+    width:390,
+   
   },
   image: {
-    width: '100%',
-    height: '60%', // Altura da imagem
-    borderRadius: 10,
-  },
-  title: {
-    fontSize: 18,
-    marginTop: 10,
-    color: '#333',
+    width: 380,
+    height: 200,
+    borderRadius: 20,
   },
 });
 

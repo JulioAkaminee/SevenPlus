@@ -1,17 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StatusBar, Image, TextInput, TouchableOpacity, StyleSheet, ImageBackground, SafeAreaView } from 'react-native';
+import { 
+  View, 
+  Text, 
+  StatusBar, 
+  Image, 
+  TouchableOpacity, 
+  StyleSheet, 
+  SafeAreaView, 
+  TouchableWithoutFeedback, 
+  Keyboard, 
+  ScrollView
+} from 'react-native';
 import fundoSevenPlus from '../../assets/images/fundoSevenPlus.png';
 import styles from '../styles/homeStyle';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import logoSevenPlus from '../../assets/images/logoSevenPlus.png';
 import userIcon from '../../assets/images/usuarioIcon.png';
+import Carrossel from '../../src/components/carrossel/carrossel';
 import * as Font from 'expo-font';
-
-
 
 export default function Login({ navigation }) {
   const [menuVisivel, setMenuVisivel] = useState(false);
 
+  // Função para abrir ou fechar o menu
   const abrirMenu = () => {
     setMenuVisivel(!menuVisivel);
   };
@@ -29,50 +40,81 @@ export default function Login({ navigation }) {
     return <Text>Carregando fonte...</Text>;
   }
 
- 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Imagem de fundo */}
-      <ImageBackground style={styles.background} source={fundoSevenPlus}>
-   
+    <ScrollView>
+     
+            {/* Header */}
+            <View style={styles.header}>
+              <Image source={logoSevenPlus} style={styles.logo} />
+              <View style={styles.containerUsuario}>
+                <Image source={userIcon} style={styles.logo} />
+                <TouchableOpacity onPress={abrirMenu}>
+                  <Icon style={styles.icon} name="menu" size={60} color="white" />
+                </TouchableOpacity>
+              </View>
+            </View>
+            {/* Componente Carrossel */}
+            <Carrossel/>
+            {/* Renderização condicional do menu, se */}
+            {menuVisivel && (
+            <>
+            <TouchableWithoutFeedback onPress={abrirMenu}>
+              <View style={styles.fundoMenu} />
+            </TouchableWithoutFeedback>
+            <View style={styles.menu}>
+                <TouchableOpacity>
+                  <Text style={styles.textItemMenu}>Inicio</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Text style={styles.textItemMenu}>Filmes</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Text style={styles.textItemMenu}>Series</Text>
+                </TouchableOpacity>
+            </View>
+            </>
+            )}
+            {/* Filmes */}
+            <View>
+              <Text style={styles.textCategoriaFilme}>AÇÃO</Text>
+              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+              <View style={styles.containerFilmes} >
+     
+                <Image style={styles.imagemFilme} source={{uri: 'https://occ-0-8407-114.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABahwZJ8gVl4SVfthSV63P6zHRHPOuXd7sZ_b-cGLf0l7pFFGYf2SPGuLmPulZVvAY70mNOXmP7hkZ0lJHVatjm1qnrfbycrflc-ySmzeo2k7nKPwMWGZ225NcAmW7blAlgaLrQ.jpg?r=93b'}}/>
+                <Image style={styles.imagemFilme} source={{uri: 'https://occ-0-8407-114.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABahwZJ8gVl4SVfthSV63P6zHRHPOuXd7sZ_b-cGLf0l7pFFGYf2SPGuLmPulZVvAY70mNOXmP7hkZ0lJHVatjm1qnrfbycrflc-ySmzeo2k7nKPwMWGZ225NcAmW7blAlgaLrQ.jpg?r=93b'}}/>
+                <Image style={styles.imagemFilme} source={{uri: 'https://occ-0-8407-114.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABahwZJ8gVl4SVfthSV63P6zHRHPOuXd7sZ_b-cGLf0l7pFFGYf2SPGuLmPulZVvAY70mNOXmP7hkZ0lJHVatjm1qnrfbycrflc-ySmzeo2k7nKPwMWGZ225NcAmW7blAlgaLrQ.jpg?r=93b'}}/>
+                <Image style={styles.imagemFilme} source={{uri: 'https://occ-0-8407-114.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABahwZJ8gVl4SVfthSV63P6zHRHPOuXd7sZ_b-cGLf0l7pFFGYf2SPGuLmPulZVvAY70mNOXmP7hkZ0lJHVatjm1qnrfbycrflc-ySmzeo2k7nKPwMWGZ225NcAmW7blAlgaLrQ.jpg?r=93b'}}/>
+              </View>
+              </ScrollView>
+            </View>
+            <View>
+              <Text style={styles.textCategoriaFilme}>DRAMA</Text>
+              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+              <View style={styles.containerFilmes} >
+     
+                <Image style={styles.imagemFilme} source={{uri: 'https://occ-0-8407-114.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABahwZJ8gVl4SVfthSV63P6zHRHPOuXd7sZ_b-cGLf0l7pFFGYf2SPGuLmPulZVvAY70mNOXmP7hkZ0lJHVatjm1qnrfbycrflc-ySmzeo2k7nKPwMWGZ225NcAmW7blAlgaLrQ.jpg?r=93b'}}/>
+                <Image style={styles.imagemFilme} source={{uri: 'https://occ-0-8407-114.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABahwZJ8gVl4SVfthSV63P6zHRHPOuXd7sZ_b-cGLf0l7pFFGYf2SPGuLmPulZVvAY70mNOXmP7hkZ0lJHVatjm1qnrfbycrflc-ySmzeo2k7nKPwMWGZ225NcAmW7blAlgaLrQ.jpg?r=93b'}}/>
+                <Image style={styles.imagemFilme} source={{uri: 'https://occ-0-8407-114.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABahwZJ8gVl4SVfthSV63P6zHRHPOuXd7sZ_b-cGLf0l7pFFGYf2SPGuLmPulZVvAY70mNOXmP7hkZ0lJHVatjm1qnrfbycrflc-ySmzeo2k7nKPwMWGZ225NcAmW7blAlgaLrQ.jpg?r=93b'}}/>
+                <Image style={styles.imagemFilme} source={{uri: 'https://occ-0-8407-114.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABahwZJ8gVl4SVfthSV63P6zHRHPOuXd7sZ_b-cGLf0l7pFFGYf2SPGuLmPulZVvAY70mNOXmP7hkZ0lJHVatjm1qnrfbycrflc-ySmzeo2k7nKPwMWGZ225NcAmW7blAlgaLrQ.jpg?r=93b'}}/>
+              </View>
+              </ScrollView>
+            </View>
+            <View>
+              <Text style={styles.textCategoriaFilme}>ROMANCE</Text>
+              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+              <View style={styles.containerFilmes} >
+     
+                <Image style={styles.imagemFilme} source={{uri: 'https://occ-0-8407-114.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABahwZJ8gVl4SVfthSV63P6zHRHPOuXd7sZ_b-cGLf0l7pFFGYf2SPGuLmPulZVvAY70mNOXmP7hkZ0lJHVatjm1qnrfbycrflc-ySmzeo2k7nKPwMWGZ225NcAmW7blAlgaLrQ.jpg?r=93b'}}/>
+                <Image style={styles.imagemFilme} source={{uri: 'https://occ-0-8407-114.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABahwZJ8gVl4SVfthSV63P6zHRHPOuXd7sZ_b-cGLf0l7pFFGYf2SPGuLmPulZVvAY70mNOXmP7hkZ0lJHVatjm1qnrfbycrflc-ySmzeo2k7nKPwMWGZ225NcAmW7blAlgaLrQ.jpg?r=93b'}}/>
+                <Image style={styles.imagemFilme} source={{uri: 'https://occ-0-8407-114.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABahwZJ8gVl4SVfthSV63P6zHRHPOuXd7sZ_b-cGLf0l7pFFGYf2SPGuLmPulZVvAY70mNOXmP7hkZ0lJHVatjm1qnrfbycrflc-ySmzeo2k7nKPwMWGZ225NcAmW7blAlgaLrQ.jpg?r=93b'}}/>
+                <Image style={styles.imagemFilme} source={{uri: 'https://occ-0-8407-114.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABahwZJ8gVl4SVfthSV63P6zHRHPOuXd7sZ_b-cGLf0l7pFFGYf2SPGuLmPulZVvAY70mNOXmP7hkZ0lJHVatjm1qnrfbycrflc-ySmzeo2k7nKPwMWGZ225NcAmW7blAlgaLrQ.jpg?r=93b'}}/>
+              </View>
+              </ScrollView>
+            </View>
+     
+   </ScrollView>
 
-        {/* Header */}
-        <View style={styles.header}>
-          <Image source={logoSevenPlus} style={styles.logo} />
-          <View style={styles.containerUsuario}>
-            <Image source={userIcon} style={styles.logo} />
-            <TouchableOpacity onPress={abrirMenu}>
-              <Icon style={styles.icon} name="menu" size={60} color="white" />
-            </TouchableOpacity>
-
-          </View>
-        </View>
-       
-            {/* Renderização condicional do menu */}
-            {(() => {
-              if (menuVisivel === true) {  // Verifica se o menu deve ser mostrado
-                return (
-                  
-                  <View style={styles.menu}>
-                    <TouchableOpacity>
-                    <Text style={styles.textItemMenu}>Inicio</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity>
-                    <Text style={styles.textItemMenu}>Filmes</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity>
-                    <Text style={styles.textItemMenu}>Series</Text>
-                    </TouchableOpacity>
-                    
-                  
-                  </View>
-                );
-              }
-              return null;  
-            })()}
-      </ImageBackground>
     </SafeAreaView>
   );
 }
