@@ -35,9 +35,9 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 0,
         right: 0,
-        width: 250,
+        width: 200,
         height: '100%',
-        backgroundColor: '#707070', // Fundo translúcido
+        backgroundColor: '#ffff', // Fundo translúcido
         paddingTop: 100,
         display: 'flex',
         justifyContent: 'flex-start',
@@ -48,11 +48,41 @@ const styles = StyleSheet.create({
         zIndex: 999
         
     },
+    menuUsuario:{
+      backgroundColor: 'white',
+      zIndex: 9999,
+      position: 'absolute',
+      top: 120,
+      left: 216,
+      width: 150,
+      padding: 10,
+      display: 'flex',
+  
+    },
+    textMenuUsuario:{
+      textAlign: 'center',
+      margin: 5,
+      fontSize: 18
+    },
+    seta: {
+      width: 0,
+      height: 0,
+      borderLeftWidth: 10,
+      borderRightWidth: 10,
+      borderBottomWidth: 10,
+      borderLeftColor: 'transparent',
+      borderRightColor: 'transparent',
+      borderBottomColor: 'white', 
+      alignSelf: 'center',
+      marginBottom: 0,
+      position: 'absolute',
+      top: -10
+    },
     textItemMenu:{
         textAlign: 'center',
         fontSize: 25,
         margin: 10,
-        color: 'white'
+        color: 'black'
     },
     fundoMenu: {
         position: 'absolute',
@@ -72,14 +102,39 @@ const styles = StyleSheet.create({
       containerFilmes:{
         display:'flex',
         flexDirection: 'row',
+        margin: 10
         
       },
       textCategoriaFilme:{
-        margin: 10,
+        marginLeft: 15,
         fontSize: 24,
         fontWeight:'bold',
+    
+      
         
-      }
+      },
+     containerMenuText:{
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center'
+     },
+     iconMenu:{
+      color:'black'
+     },
+     footer: {
+      backgroundColor: 'gray',
+      width: '100%',
+      minHeight: 30, 
+      padding: 10, 
+      display: 'flex',
+      justifyContent: 'space-around',
+      alignItems: 'center', 
+      flexDirection: 'row',
+    },
+     containerIconFooter:{
+
+     }
+
    
    
   });

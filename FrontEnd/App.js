@@ -7,6 +7,7 @@ import Register from './src/pages/register'
 import Home from './src/pages/home'
 
 
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -32,12 +33,14 @@ export default function App() {
          
         />
 
-<Stack.Screen 
+         <Stack.Screen 
           name="Home" 
           component={Home} 
           options={{ headerShown: false }} 
          
         />
+
+       
      
      
       </Stack.Navigator>

@@ -21,10 +21,16 @@ import * as Font from 'expo-font';
 
 export default function Login({ navigation }) {
   const [menuVisivel, setMenuVisivel] = useState(false);
+  const [menuUsuarioVisivel, setMenuUsuarioVisivel] = useState(false);
 
   // Função para abrir ou fechar o menu
   const abrirMenu = () => {
     setMenuVisivel(!menuVisivel);
+  };
+
+  //Função para abrir ou fechar o menu do usuario
+  const abrirMenuUsuario = () =>{
+    setMenuUsuarioVisivel(!menuUsuarioVisivel);
   };
 
   // Carregando minha fonte personalizada
@@ -48,7 +54,9 @@ export default function Login({ navigation }) {
             <View style={styles.header}>
               <Image source={logoSevenPlus} style={styles.logo} />
               <View style={styles.containerUsuario}>
-                <Image source={userIcon} style={styles.logo} />
+                <TouchableOpacity onPress={abrirMenuUsuario}>
+                  <Image  source={userIcon} style={styles.logo} />
+                </TouchableOpacity>
                 <TouchableOpacity onPress={abrirMenu}>
                   <Icon style={styles.icon} name="menu" size={60} color="white" />
                 </TouchableOpacity>
@@ -56,22 +64,44 @@ export default function Login({ navigation }) {
             </View>
             {/* Componente Carrossel */}
             <Carrossel/>
-            {/* Renderização condicional do menu, se */}
+            {/* Renderização condicional do menu */}
             {menuVisivel && (
             <>
             <TouchableWithoutFeedback onPress={abrirMenu}>
               <View style={styles.fundoMenu} />
             </TouchableWithoutFeedback>
             <View style={styles.menu}>
-                <TouchableOpacity>
+                <TouchableOpacity style={styles.containerMenuText}>
+                  <Icon style={styles.iconMenu} name="home" size={40} color="white" />
                   <Text style={styles.textItemMenu}>Inicio</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity style={styles.containerMenuText}>
+                  <Icon style={styles.iconMenu} name="movie" size={40} color="white" />
                   <Text style={styles.textItemMenu}>Filmes</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity style={styles.containerMenuText}>
+                  <Icon style={styles.iconMenu} name="movie" size={40} color="white" />
                   <Text style={styles.textItemMenu}>Series</Text>
                 </TouchableOpacity>
+            </View>
+            </>
+            )}
+
+            {/* modal usuario */}
+            {menuUsuarioVisivel && (
+            <>
+            <TouchableWithoutFeedback onPress={abrirMenuUsuario}>
+              <View style={styles.fundoMenu} />
+            </TouchableWithoutFeedback>
+            <View style={styles.menuUsuario}>
+            <View style={styles.seta}></View>
+                <TouchableOpacity>
+                  <Text style={styles.textMenuUsuario}>Configurações</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Text style={styles.textMenuUsuario}>Favoritos</Text>
+                </TouchableOpacity>
+                
             </View>
             </>
             )}
@@ -114,7 +144,22 @@ export default function Login({ navigation }) {
             </View>
      
    </ScrollView>
+            <View style={styles.footer}>
+            <View style={styles.containerIconFooter}>
+              <Icon name="home" size={30} color="white" />
+              <Text style={{color:'white'}}>Home</Text>
+            </View>
 
+            <View style={styles.containerIconFooter}>
+              <Icon name="home" size={30} color="white" />
+              <Text style={{color:'white'}}>Filmes</Text>
+            </View>
+
+            <View style={styles.containerIconFooter}>
+              <Icon name="home" size={30} color="white" />
+              <Text style={{color:'white'}}>Series</Text>
+            </View>
+          </View>
     </SafeAreaView>
   );
 }
