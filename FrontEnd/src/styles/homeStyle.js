@@ -14,10 +14,12 @@ const styles = StyleSheet.create({
     header:{
         display: 'flex',
         flexDirection: 'row',
-        paddingTop: 40,
+        paddingTop: 10,
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 10,
+        backgroundColor:'#1B5F96',
+        marginBottom: 15
     
     },
     containerUsuario:{
@@ -28,7 +30,7 @@ const styles = StyleSheet.create({
     },
     icon:{
         marginLeft: 15,
-        color: 'black',
+        color: 'white',
        
     },
     menu:{
@@ -122,7 +124,7 @@ const styles = StyleSheet.create({
       color:'black'
      },
      footer: {
-      backgroundColor: 'gray',
+      backgroundColor: '#1B5F96',
       width: '100%',
       minHeight: 30, 
       padding: 10, 
@@ -132,7 +134,8 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
     },
      containerIconFooter:{
-
+      alignItems:'center',
+  
      }
 
    

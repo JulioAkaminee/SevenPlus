@@ -1,25 +1,24 @@
-
-const mysql = require('mysql2/promise');
+const mysql = require('mysql2');
 
 // Configuração da conexão com o banco de dados
-const db = mysql.createPool({
+const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
   database: 'sevenplus'
 });
 
-async function testarConexao() {
-  try {
-    // Executando uma consulta simples para testar a conexão
-    const [rows, fields] = await db.query('SELECT 1');
-    console.log('Conexão bem-sucedida!', rows);  // Se conseguir executar a consulta, a conexão está OK
-  } catch (err) {
-    console.error('Erro ao conectar ao banco de dados:', err);
-  }
+function testarConexao() {
+  db.query('SELECT 1', function (err, rows, fields) {
+    if (err) {
+      console.error('Erro ao conectar ao banco de dados:', err);
+    } else {
+      console.log('Conexão bem-sucedida!', rows); // Se conseguir executar a consulta, a conexão está OK
+    }
+  });
 }
 
-testarConexao()
+testarConexao();
 
-//exportando modúlo
+// Exportando módulo
 module.exports = db;

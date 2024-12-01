@@ -15,7 +15,7 @@ const Carrossel = () => {
 
   return (
     <View style={styles.container}>
-      <Swiper autoplay={true} autoplayTimeout={5} showsPagination={true}>
+      <Swiper autoplay={true} autoplayTimeout={8} showsPagination={true}>
         {data.map((item) => (
           <View key={item.id} style={styles.itemContainer}>
             <Image source={{ uri: item.imageUrl }} style={styles.image} />

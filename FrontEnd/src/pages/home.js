@@ -145,20 +145,25 @@ export default function Login({ navigation }) {
      
    </ScrollView>
             <View style={styles.footer}>
-            <View style={styles.containerIconFooter}>
-              <Icon name="home" size={30} color="white" />
-              <Text style={{color:'white'}}>Home</Text>
-            </View>
+         
+              <TouchableOpacity style={styles.containerIconFooter}>
+                <Icon name="home" size={25} color="white" />
+                <Text style={{color:'white', fontSize:12}}>Home</Text>
+              </TouchableOpacity>
+        
 
-            <View style={styles.containerIconFooter}>
-              <Icon name="home" size={30} color="white" />
-              <Text style={{color:'white'}}>Filmes</Text>
-            </View>
+           
+              <TouchableOpacity style={styles.containerIconFooter}>
+                <Icon name="movie" size={25} color="white" />
+                <Text style={{color:'white', fontSize:12}}>Filmes</Text>
+              </TouchableOpacity>
+      
 
-            <View style={styles.containerIconFooter}>
-              <Icon name="home" size={30} color="white" />
-              <Text style={{color:'white'}}>Series</Text>
-            </View>
+            <TouchableOpacity style={styles.containerIconFooter}>
+            <Icon name="movie" size={25} color="white" />
+            <Text style={{color:'white', fontSize:12}}>Series</Text>
+            </TouchableOpacity>
+            
           </View>
     </SafeAreaView>
   );

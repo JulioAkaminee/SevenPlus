@@ -8,12 +8,14 @@ import Home from './src/pages/home'
 
 
 
+
+
 const Stack = createStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="Home">
         <Stack.Screen 
           name="Login" 
           component={Login} 
@@ -39,6 +41,9 @@ export default function App() {
           options={{ headerShown: false }} 
          
         />
+
+      
+
 
        
      
