@@ -5,6 +5,9 @@ import Login from './src/pages/login';
 import ForgetPassword from './src/pages/forgetPassword'
 import Register from './src/pages/register'
 import Home from './src/pages/home'
+import Filmes from './src/pages/filmes';
+import Navegacao from './src/components/barraNavegacao/navegacao';
+import FilmesHorizontal from './src/components/filmesHorizontal/filmesHorizontalAcao';
 
 
 
@@ -15,7 +18,7 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="Login">
         <Stack.Screen 
           name="Login" 
           component={Login} 
@@ -41,6 +44,15 @@ export default function App() {
           options={{ headerShown: false }} 
          
         />
+
+         <Stack.Screen 
+          name="Filmes" 
+          component={Filmes} 
+          options={{ headerShown: false }} 
+         
+        />
+
+
 
       
 

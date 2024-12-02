@@ -1,170 +1,133 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  View, 
-  Text, 
-  StatusBar, 
-  Image, 
-  TouchableOpacity, 
-  StyleSheet, 
-  SafeAreaView, 
-  TouchableWithoutFeedback, 
-  Keyboard, 
-  ScrollView
-} from 'react-native';
-import fundoSevenPlus from '../../assets/images/fundoSevenPlus.png';
-import styles from '../styles/homeStyle';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import logoSevenPlus from '../../assets/images/logoSevenPlus.png';
-import userIcon from '../../assets/images/usuarioIcon.png';
-import Carrossel from '../../src/components/carrossel/carrossel';
-import * as Font from 'expo-font';
+  import React, { useState, useEffect } from 'react';
+  import { 
+    View, 
+    Text, 
+    StatusBar, 
+    Image, 
+    TouchableOpacity, 
+    StyleSheet, 
+    SafeAreaView, 
+    TouchableWithoutFeedback, 
+    Keyboard, 
+    ScrollView,
+    ImageBackground,
+    Animated,
+    Easing
+  } from 'react-native';
+  import fundoSevenPlus from '../../assets/images/fundoSevenPlus.png';
+  import styles from '../styles/homeStyle';
+  import Icon from 'react-native-vector-icons/MaterialIcons';
+  import logoSevenPlus from '../../assets/images/logoSevenPlus.png';
+  import userIcon from '../../assets/images/usuarioIcon.png';
+  import Carrossel from '../../src/components/carrossel/carrossel';
+  import * as Font from 'expo-font';
+  import Navegacao from '../components/barraNavegacao/navegacao';
+  import FilmesHorizontalAcao from '../components/filmesHorizontal/filmesHorizontalAcao';
+  import FilmesHorizontalDrama from '../components/filmesHorizontal/filmesHorizontalDrama';
+  export default function Login({ navigation }) {
+    const [menuVisivel, setMenuVisivel] = useState(false);
+    const [menuUsuarioVisivel, setMenuUsuarioVisivel] = useState(false);
+    const [animacaoMenu, setAnimacaoMenu] = useState(new Animated.Value(0)); //inicia com opacidade 0
+   
 
-export default function Login({ navigation }) {
-  const [menuVisivel, setMenuVisivel] = useState(false);
-  const [menuUsuarioVisivel, setMenuUsuarioVisivel] = useState(false);
+ 
+    //Função para abrir ou fechar o menu do usuario
+    const abrirMenuUsuario = () =>{
+      setMenuUsuarioVisivel(!menuUsuarioVisivel);
 
-  // Função para abrir ou fechar o menu
-  const abrirMenu = () => {
-    setMenuVisivel(!menuVisivel);
-  };
+      Animated.timing(animacaoMenu,{
+        toValue:menuUsuarioVisivel ? 0 : 1,
+        duration: 250,
+        easing: Easing.ease,
+        useNativeDriver:true,
+      }).start();
 
-  //Função para abrir ou fechar o menu do usuario
-  const abrirMenuUsuario = () =>{
-    setMenuUsuarioVisivel(!menuUsuarioVisivel);
-  };
+    };
 
-  // Carregando minha fonte personalizada
-  const [fontCarregada, setFontCarregada] = useState(false);
-  useEffect(() => {
-    Font.loadAsync({
-      'MemoirDisplay': require('../../assets/fonts/Memoir Display.ttf'),
-    }).then(() => setFontCarregada(true));
-  }, []);
+ 
+    // Carregando minha fonte personalizada
+    const [fontCarregada, setFontCarregada] = useState(false);
+    useEffect(() => {
+      Font.loadAsync({
+        'MemoirDisplay': require('../../assets/fonts/Memoir Display.ttf'),
+      }).then(() => setFontCarregada(true));
+    }, []);
 
-  // Caso a fonte não seja carregada, exibe a mensagem
-  if (!fontCarregada) {
-    return <Text>Carregando fonte...</Text>;
-  }
+    // Caso a fonte não seja carregada, exibe a mensagem
+    if (!fontCarregada) {
+      return <Text>Carregando fonte...</Text>;
+    }
 
-  return (
-    <SafeAreaView style={styles.container}>
-    <ScrollView>
-     
-            {/* Header */}
-            <View style={styles.header}>
-              <Image source={logoSevenPlus} style={styles.logo} />
-              <View style={styles.containerUsuario}>
-                <TouchableOpacity onPress={abrirMenuUsuario}>
-                  <Image  source={userIcon} style={styles.logo} />
-                </TouchableOpacity>
-                <TouchableOpacity onPress={abrirMenu}>
-                  <Icon style={styles.icon} name="menu" size={60} color="white" />
-                </TouchableOpacity>
-              </View>
-            </View>
-            {/* Componente Carrossel */}
-            <Carrossel/>
-            {/* Renderização condicional do menu */}
-            {menuVisivel && (
-            <>
-            <TouchableWithoutFeedback onPress={abrirMenu}>
-              <View style={styles.fundoMenu} />
-            </TouchableWithoutFeedback>
-            <View style={styles.menu}>
-                <TouchableOpacity style={styles.containerMenuText}>
-                  <Icon style={styles.iconMenu} name="home" size={40} color="white" />
-                  <Text style={styles.textItemMenu}>Inicio</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.containerMenuText}>
-                  <Icon style={styles.iconMenu} name="movie" size={40} color="white" />
-                  <Text style={styles.textItemMenu}>Filmes</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.containerMenuText}>
-                  <Icon style={styles.iconMenu} name="movie" size={40} color="white" />
-                  <Text style={styles.textItemMenu}>Series</Text>
-                </TouchableOpacity>
-            </View>
-            </>
-            )}
-
-            {/* modal usuario */}
-            {menuUsuarioVisivel && (
-            <>
-            <TouchableWithoutFeedback onPress={abrirMenuUsuario}>
-              <View style={styles.fundoMenu} />
-            </TouchableWithoutFeedback>
-            <View style={styles.menuUsuario}>
-            <View style={styles.seta}></View>
-                <TouchableOpacity>
-                  <Text style={styles.textMenuUsuario}>Configurações</Text>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Text style={styles.textMenuUsuario}>Favoritos</Text>
-                </TouchableOpacity>
+    return (
+      <SafeAreaView style={styles.container}>
+        <View style={styles.background} >
+              {/* Header */}
+              <View style={styles.header}>
+                <Image source={logoSevenPlus} style={styles.logo} />
+                <View style={styles.containerUsuario}>
+                  <TouchableOpacity onPress={abrirMenuUsuario}>
+                    <Image  source={userIcon} style={styles.logo} />
+                  </TouchableOpacity>
                 
-            </View>
-            </>
-            )}
-            {/* Filmes */}
-            <View>
-              <Text style={styles.textCategoriaFilme}>AÇÃO</Text>
-              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-              <View style={styles.containerFilmes} >
-     
-                <Image style={styles.imagemFilme} source={{uri: 'https://occ-0-8407-114.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABahwZJ8gVl4SVfthSV63P6zHRHPOuXd7sZ_b-cGLf0l7pFFGYf2SPGuLmPulZVvAY70mNOXmP7hkZ0lJHVatjm1qnrfbycrflc-ySmzeo2k7nKPwMWGZ225NcAmW7blAlgaLrQ.jpg?r=93b'}}/>
-                <Image style={styles.imagemFilme} source={{uri: 'https://occ-0-8407-114.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABahwZJ8gVl4SVfthSV63P6zHRHPOuXd7sZ_b-cGLf0l7pFFGYf2SPGuLmPulZVvAY70mNOXmP7hkZ0lJHVatjm1qnrfbycrflc-ySmzeo2k7nKPwMWGZ225NcAmW7blAlgaLrQ.jpg?r=93b'}}/>
-                <Image style={styles.imagemFilme} source={{uri: 'https://occ-0-8407-114.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABahwZJ8gVl4SVfthSV63P6zHRHPOuXd7sZ_b-cGLf0l7pFFGYf2SPGuLmPulZVvAY70mNOXmP7hkZ0lJHVatjm1qnrfbycrflc-ySmzeo2k7nKPwMWGZ225NcAmW7blAlgaLrQ.jpg?r=93b'}}/>
-                <Image style={styles.imagemFilme} source={{uri: 'https://occ-0-8407-114.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABahwZJ8gVl4SVfthSV63P6zHRHPOuXd7sZ_b-cGLf0l7pFFGYf2SPGuLmPulZVvAY70mNOXmP7hkZ0lJHVatjm1qnrfbycrflc-ySmzeo2k7nKPwMWGZ225NcAmW7blAlgaLrQ.jpg?r=93b'}}/>
+                </View>
+      
+      
               </View>
-              </ScrollView>
-            </View>
-            <View>
-              <Text style={styles.textCategoriaFilme}>DRAMA</Text>
-              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-              <View style={styles.containerFilmes} >
-     
-                <Image style={styles.imagemFilme} source={{uri: 'https://occ-0-8407-114.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABahwZJ8gVl4SVfthSV63P6zHRHPOuXd7sZ_b-cGLf0l7pFFGYf2SPGuLmPulZVvAY70mNOXmP7hkZ0lJHVatjm1qnrfbycrflc-ySmzeo2k7nKPwMWGZ225NcAmW7blAlgaLrQ.jpg?r=93b'}}/>
-                <Image style={styles.imagemFilme} source={{uri: 'https://occ-0-8407-114.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABahwZJ8gVl4SVfthSV63P6zHRHPOuXd7sZ_b-cGLf0l7pFFGYf2SPGuLmPulZVvAY70mNOXmP7hkZ0lJHVatjm1qnrfbycrflc-ySmzeo2k7nKPwMWGZ225NcAmW7blAlgaLrQ.jpg?r=93b'}}/>
-                <Image style={styles.imagemFilme} source={{uri: 'https://occ-0-8407-114.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABahwZJ8gVl4SVfthSV63P6zHRHPOuXd7sZ_b-cGLf0l7pFFGYf2SPGuLmPulZVvAY70mNOXmP7hkZ0lJHVatjm1qnrfbycrflc-ySmzeo2k7nKPwMWGZ225NcAmW7blAlgaLrQ.jpg?r=93b'}}/>
-                <Image style={styles.imagemFilme} source={{uri: 'https://occ-0-8407-114.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABahwZJ8gVl4SVfthSV63P6zHRHPOuXd7sZ_b-cGLf0l7pFFGYf2SPGuLmPulZVvAY70mNOXmP7hkZ0lJHVatjm1qnrfbycrflc-ySmzeo2k7nKPwMWGZ225NcAmW7blAlgaLrQ.jpg?r=93b'}}/>
-              </View>
-              </ScrollView>
-            </View>
-            <View>
-              <Text style={styles.textCategoriaFilme}>ROMANCE</Text>
-              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-              <View style={styles.containerFilmes} >
-     
-                <Image style={styles.imagemFilme} source={{uri: 'https://occ-0-8407-114.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABahwZJ8gVl4SVfthSV63P6zHRHPOuXd7sZ_b-cGLf0l7pFFGYf2SPGuLmPulZVvAY70mNOXmP7hkZ0lJHVatjm1qnrfbycrflc-ySmzeo2k7nKPwMWGZ225NcAmW7blAlgaLrQ.jpg?r=93b'}}/>
-                <Image style={styles.imagemFilme} source={{uri: 'https://occ-0-8407-114.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABahwZJ8gVl4SVfthSV63P6zHRHPOuXd7sZ_b-cGLf0l7pFFGYf2SPGuLmPulZVvAY70mNOXmP7hkZ0lJHVatjm1qnrfbycrflc-ySmzeo2k7nKPwMWGZ225NcAmW7blAlgaLrQ.jpg?r=93b'}}/>
-                <Image style={styles.imagemFilme} source={{uri: 'https://occ-0-8407-114.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABahwZJ8gVl4SVfthSV63P6zHRHPOuXd7sZ_b-cGLf0l7pFFGYf2SPGuLmPulZVvAY70mNOXmP7hkZ0lJHVatjm1qnrfbycrflc-ySmzeo2k7nKPwMWGZ225NcAmW7blAlgaLrQ.jpg?r=93b'}}/>
-                <Image style={styles.imagemFilme} source={{uri: 'https://occ-0-8407-114.1.nflxso.net/dnm/api/v6/Qs00mKCpRvrkl3HZAN5KwEL1kpE/AAAABahwZJ8gVl4SVfthSV63P6zHRHPOuXd7sZ_b-cGLf0l7pFFGYf2SPGuLmPulZVvAY70mNOXmP7hkZ0lJHVatjm1qnrfbycrflc-ySmzeo2k7nKPwMWGZ225NcAmW7blAlgaLrQ.jpg?r=93b'}}/>
-              </View>
-              </ScrollView>
-            </View>
-     
-   </ScrollView>
-            <View style={styles.footer}>
-         
-              <TouchableOpacity style={styles.containerIconFooter}>
-                <Icon name="home" size={25} color="white" />
-                <Text style={{color:'white', fontSize:12}}>Home</Text>
-              </TouchableOpacity>
-        
+              <ScrollView>
+              {/* Componente Carrossel */}
+              <Carrossel/>
+            
 
-           
-              <TouchableOpacity style={styles.containerIconFooter}>
-                <Icon name="movie" size={25} color="white" />
-                <Text style={{color:'white', fontSize:12}}>Filmes</Text>
-              </TouchableOpacity>
+              {/* Filmes */}
+        
+                <Text style={styles.textCategoriaFilme}>Ação</Text>
+                <FilmesHorizontalAcao/>
+                <Text style={styles.textCategoriaFilme}>Drama</Text>
+                <FilmesHorizontalDrama />
+              
+                </ScrollView>
       
 
-            <TouchableOpacity style={styles.containerIconFooter}>
-            <Icon name="movie" size={25} color="white" />
-            <Text style={{color:'white', fontSize:12}}>Series</Text>
-            </TouchableOpacity>
+    </View>
+              <Navegacao navigation={navigation}/>
+              {/* modal usuario */}
+              {menuUsuarioVisivel && (
+              <>
+              <TouchableWithoutFeedback onPress={abrirMenuUsuario}>
+                <View style={styles.fundoMenu} />
+              </TouchableWithoutFeedback>
+              <Animated.View 
+            style={[
+              styles.menuUsuario, 
+              {
+                transform: [
+                  {
+                    translateY: animacaoMenu.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [500, 0], // O menu vai se mover de baixo para cima
+                    })
+                  }
+                ]
+              }
+            ]}
+          >
             
-          </View>
-    </SafeAreaView>
-  );
-}
+            
+                  <TouchableOpacity>
+                    <Text style={styles.textMenuUsuario}>Configurações</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Text style={styles.textMenuUsuario}>Favoritos</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                    <Text style={styles.textMenuUsuarioExit}>Sair</Text>
+                  </TouchableOpacity>
+                  
+                  </Animated.View>
+              </>
+              )}
+
+              
+      </SafeAreaView>
+    );
+  }

@@ -3,7 +3,11 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      background: 'white'
+     
+    },
+    background:{
+      flex:1,
+      backgroundColor:'#222831'
     },
     logo:{
         width: 70,
@@ -14,12 +18,12 @@ const styles = StyleSheet.create({
     header:{
         display: 'flex',
         flexDirection: 'row',
-        paddingTop: 10,
+        paddingTop: 40,
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 10,
-        backgroundColor:'#1B5F96',
-        marginBottom: 15
+        backgroundColor:'#1E1E26',
+      
     
     },
     containerUsuario:{
@@ -51,34 +55,32 @@ const styles = StyleSheet.create({
         
     },
     menuUsuario:{
-      backgroundColor: 'white',
+      backgroundColor: '#1E1E26',
       zIndex: 9999,
       position: 'absolute',
-      top: 120,
-      left: 216,
-      width: 150,
+      bottom: 0,
+      width: '100%',
       padding: 10,
       display: 'flex',
+      borderTopLeftRadius: 20,
+      borderTopRightRadius: 20,
+      height: 150,
+      display:'flex',
+      alignItems:'center',
+      justifyContent:'center'
   
     },
     textMenuUsuario:{
       textAlign: 'center',
       margin: 5,
-      fontSize: 18
+      fontSize: 18,
+      color: 'white'
     },
-    seta: {
-      width: 0,
-      height: 0,
-      borderLeftWidth: 10,
-      borderRightWidth: 10,
-      borderBottomWidth: 10,
-      borderLeftColor: 'transparent',
-      borderRightColor: 'transparent',
-      borderBottomColor: 'white', 
-      alignSelf: 'center',
-      marginBottom: 0,
-      position: 'absolute',
-      top: -10
+    textMenuUsuarioExit:{
+      textAlign: 'center',
+      margin: 5,
+      fontSize: 18,
+      color: '#FF4C4C'
     },
     textItemMenu:{
         textAlign: 'center',
@@ -92,7 +94,7 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)', // Semitransparente
+        backgroundColor: 'rgba(0, 0, 0, 0.8)', // Semitransparente
         zIndex: 998, // Fica atrás do menu
       },
       imagemFilme:{
@@ -111,6 +113,7 @@ const styles = StyleSheet.create({
         marginLeft: 15,
         fontSize: 24,
         fontWeight:'bold',
+        color:'white'
     
       
         
@@ -123,20 +126,7 @@ const styles = StyleSheet.create({
      iconMenu:{
       color:'black'
      },
-     footer: {
-      backgroundColor: '#1B5F96',
-      width: '100%',
-      minHeight: 30, 
-      padding: 10, 
-      display: 'flex',
-      justifyContent: 'space-around',
-      alignItems: 'center', 
-      flexDirection: 'row',
-    },
-     containerIconFooter:{
-      alignItems:'center',
-  
-     }
+    
 
    
    

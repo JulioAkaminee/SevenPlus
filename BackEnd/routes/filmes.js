@@ -4,21 +4,25 @@ const db = require('../db');
 
 const router = express.Router();
 
-// Rota para listar filmes
+
 router.get('/', (req, res) => {
   const query = `
-    SELECT 
-      m.id, 
-      m.titulo, 
-      m.descricao, 
-      m.url_video, 
-      m.capa, 
-      m.data_lancamento, 
-      c.nome AS categoria
-    FROM movies m
-    LEFT JOIN movie_categories mc ON m.id = mc.movie_id
-    LEFT JOIN categories c ON mc.category_id = c.id;
-  `;
+SELECT 
+  movies.id, 
+  movies.titulo, 
+  movies.descricao, 
+  movies.url_video, 
+  movies.capa, 
+  movies.data_lancamento, 
+  GROUP_CONCAT(categories.nome) AS categorias
+FROM 
+  movies
+  LEFT JOIN movie_categories ON movies.id = movie_categories.movie_id
+  LEFT JOIN categories ON movie_categories.category_id = categories.id
+GROUP BY 
+  movies.id;
+
+`;
   
   db.query(query, (err, results) => {
     if (err) {
