@@ -3,7 +3,7 @@ import { SafeAreaView, View, Text, Image, FlatList, StyleSheet, TouchableOpacity
 import * as Font from 'expo-font';
 import YouTubeIframe from 'react-native-youtube-iframe'; // Importando o YouTubeIframe
 
-export default function FilmesHorizontalAcao({ navigation }) {
+export default function FilmesHorizontalRomance({ navigation }) {
   const [fontCarregada, setFontCarregada] = useState(false);
   const [filmes, setFilmes] = useState([]);
   const [carregamento, setCarregamento] = useState(true);
@@ -60,8 +60,8 @@ export default function FilmesHorizontalAcao({ navigation }) {
 
   const filmesAcao = filmes.filter(filme =>
     Array.isArray(filme.categorias)
-      ? filme.categorias.some(categoria => categoria.toLowerCase().includes('ação'))
-      : filme.categorias.toLowerCase().includes('ação')
+      ? filme.categorias.some(categoria => categoria.toLowerCase().includes('romance'))
+      : filme.categorias.toLowerCase().includes('romance')
   );
 
   return (

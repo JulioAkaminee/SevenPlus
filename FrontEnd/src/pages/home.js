@@ -24,6 +24,7 @@
   import Navegacao from '../components/barraNavegacao/navegacao';
   import FilmesHorizontalAcao from '../components/filmesHorizontal/filmesHorizontalAcao';
   import FilmesHorizontalDrama from '../components/filmesHorizontal/filmesHorizontalDrama';
+  import FilmesHorizontalRomance from '../components/filmesHorizontal/filmesHorizontalRomance';
   export default function Login({ navigation }) {
     const [menuVisivel, setMenuVisivel] = useState(false);
     const [menuUsuarioVisivel, setMenuUsuarioVisivel] = useState(false);
@@ -84,6 +85,8 @@
                 <FilmesHorizontalAcao/>
                 <Text style={styles.textCategoriaFilme}>Drama</Text>
                 <FilmesHorizontalDrama />
+                <Text style={styles.textCategoriaFilme}>Romance</Text>
+                <FilmesHorizontalRomance/>
               
                 </ScrollView>
       
@@ -104,7 +107,7 @@
                   {
                     translateY: animacaoMenu.interpolate({
                       inputRange: [0, 1],
-                      outputRange: [500, 0], // O menu vai se mover de baixo para cima
+                      outputRange: [500, 0], 
                     })
                   }
                 ]
@@ -116,8 +119,9 @@
                   <TouchableOpacity>
                     <Text style={styles.textMenuUsuario}>Configurações</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity>
-                    <Text style={styles.textMenuUsuario}>Favoritos</Text>
+              
+                  <TouchableOpacity onPress={() => navigation.navigate('AdicionarFilmes')}>
+                    <Text style={styles.textMenuUsuario}>Adicionar Filmes</Text>
                   </TouchableOpacity>
                   <TouchableOpacity onPress={() => navigation.navigate('Login')}>
                     <Text style={styles.textMenuUsuarioExit}>Sair</Text>

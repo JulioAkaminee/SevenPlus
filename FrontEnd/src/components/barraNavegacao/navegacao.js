@@ -19,10 +19,7 @@ export default function Navegacao({ navigation }) {
         <Text style={{ color: 'white', fontSize: 12 }}>Filmes</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.containerIconFooter}>
-        <Icon name="tv" size={25} color="white" />
-        <Text style={{ color: 'white', fontSize: 12 }}>Séries</Text>
-      </TouchableOpacity>
+     
     </View>
   );
 }

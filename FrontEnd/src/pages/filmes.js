@@ -1,12 +1,46 @@
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView, View, Text, Image, FlatList, StyleSheet } from 'react-native';
+import { 
+  View, 
+  Text, 
+  StatusBar, 
+  Image, 
+  TouchableOpacity, 
+  StyleSheet, 
+  SafeAreaView, 
+  TouchableWithoutFeedback, 
+  Keyboard, 
+  ScrollView,
+  ImageBackground,
+  Animated,
+  Easing,
+  FlatList
+} from 'react-native';
 import * as Font from 'expo-font';
 import Navegacao from '../components/barraNavegacao/navegacao';
+import logoSevenPlus from '../../assets/images/logoSevenPlus.png';
+import userIcon from '../../assets/images/usuarioIcon.png';
 
 export default function Filmes({ navigation }) {
   const [fontCarregada, setFontCarregada] = useState(false);
   const [filmes, setFilmes] = useState([]); // Estado para armazenar os filmes
   const [carregamento, setCarregamento] = useState(true);
+  const [menuUsuarioVisivel, setMenuUsuarioVisivel] = useState(false);
+  const [animacaoMenu, setAnimacaoMenu] = useState(new Animated.Value(0)); //inicia com opacidade 0
+ 
+
+
+  //Função para abrir ou fechar o menu do usuario
+  const abrirMenuUsuario = () =>{
+    setMenuUsuarioVisivel(!menuUsuarioVisivel);
+
+    Animated.timing(animacaoMenu,{
+      toValue:menuUsuarioVisivel ? 0 : 1,
+      duration: 250,
+      easing: Easing.ease,
+      useNativeDriver:true,
+    }).start();
+
+  };
 
   // Carregar a fonte personalizada
   useEffect(() => {
@@ -52,6 +86,17 @@ export default function Filmes({ navigation }) {
   // Renderiza a lista de filmes
   return (
     <>
+     <View style={styles.header}>
+                <Image source={logoSevenPlus} style={styles.logo} />
+                <View style={styles.containerUsuario}>
+                  <TouchableOpacity onPress={abrirMenuUsuario}>
+                    <Image  source={userIcon} style={styles.logo} />
+                  </TouchableOpacity>
+                
+                </View>
+      
+      
+              </View>
      <SafeAreaView style={styles.container}>
       <View style={styles.containerLista}>
           <FlatList
@@ -70,6 +115,42 @@ export default function Filmes({ navigation }) {
       </View>
     </SafeAreaView>
     <Navegacao navigation={navigation}/>
+    {menuUsuarioVisivel && (
+              <>
+              <TouchableWithoutFeedback onPress={abrirMenuUsuario}>
+                <View style={styles.fundoMenu} />
+              </TouchableWithoutFeedback>
+              <Animated.View 
+            style={[
+              styles.menuUsuario, 
+              {
+                transform: [
+                  {
+                    translateY: animacaoMenu.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: [500, 0], 
+                    })
+                  }
+                ]
+              }
+            ]}
+          >
+            
+            
+                  <TouchableOpacity>
+                    <Text style={styles.textMenuUsuario}>Configurações</Text>
+                  </TouchableOpacity>
+                
+                  <TouchableOpacity onPress={() => navigation.navigate('AdicionarFilmes')}>
+                    <Text style={styles.textMenuUsuario}>Adicionar Filmes</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                    <Text style={styles.textMenuUsuarioExit}>Sair</Text>
+                  </TouchableOpacity>
+                  
+                  </Animated.View>
+              </>
+              )}
     </>
    
   );
@@ -79,12 +160,14 @@ export default function Filmes({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f4f4f4',
+    backgroundColor: '#222831',
+    paddingTop: 15,
+
    
   },
   containerLista:{
-    padding: 10,
-    marginTop: 45,
+    paddingLeft: 10,
+    paddingRight: 10,
     display:'flex',
     justifyContent: 'center',
     alignItems:'center'
@@ -97,17 +180,17 @@ const styles = StyleSheet.create({
     color: '#555',
   },
   filmeContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: '#1E1E26',
     borderRadius: 8,
     marginBottom: 15,
     padding: 10,
-    shadowColor: '#000',
+
     
   
   },
   imagem: {
     width: '100%',
-    height: 300,
+    height: 200,
     marginBottom: 10,
     objectFit:'contain'
   },
@@ -116,17 +199,89 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 5,
     fontFamily: 'MemoirDisplay',
-    color: '#333',
+    color: 'white',
     textAlign:'center'
   },
   categoria: {
     fontSize: 16,
-    color: 'black',
+    color: 'white',
     zIndex:9999,
     textAlign:'center'
 
   },
   descricao:{
-    textAlign:'center'
-  }
+    textAlign:'center',
+    color:'white'
+  },
+  header:{
+    display: 'flex',
+    flexDirection: 'row',
+    paddingTop: 40,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: 10,
+    backgroundColor:'#1E1E26',
+  
+
+},
+containerUsuario:{
+    display:'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+   
+},
+icon:{
+    marginLeft: 15,
+    color: 'white',
+   
+},
+menuUsuario:{
+  backgroundColor: '#1E1E26',
+  zIndex: 9999,
+  position: 'absolute',
+  bottom: 0,
+  width: '100%',
+  padding: 10,
+  display: 'flex',
+  borderTopLeftRadius: 20,
+  borderTopRightRadius: 20,
+  height: 150,
+  display:'flex',
+  alignItems:'center',
+  justifyContent:'center'
+
+},
+textMenuUsuario:{
+  textAlign: 'center',
+  margin: 5,
+  fontSize: 18,
+  color: 'white'
+},
+textMenuUsuarioExit:{
+  textAlign: 'center',
+  margin: 5,
+  fontSize: 18,
+  color: '#FF4C4C'
+},
+textItemMenu:{
+    textAlign: 'center',
+    fontSize: 25,
+    margin: 10,
+    color: 'black'
+},
+fundoMenu: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.8)', // Semitransparente
+    zIndex: 998, // Fica atrás do menu
+  },
+  logo:{
+    width: 70,
+    height: 70, 
+    
+   
+}
 });

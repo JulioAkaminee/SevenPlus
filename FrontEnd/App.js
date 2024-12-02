@@ -8,6 +8,7 @@ import Home from './src/pages/home'
 import Filmes from './src/pages/filmes';
 import Navegacao from './src/components/barraNavegacao/navegacao';
 import FilmesHorizontal from './src/components/filmesHorizontal/filmesHorizontalAcao';
+import AdiconarFilmes from './src/pages/adicionarFilmes';
 
 
 
@@ -18,7 +19,7 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="Home">
         <Stack.Screen 
           name="Login" 
           component={Login} 
@@ -48,6 +49,13 @@ export default function App() {
          <Stack.Screen 
           name="Filmes" 
           component={Filmes} 
+          options={{ headerShown: false }} 
+         
+        />
+
+        <Stack.Screen 
+          name="AdicionarFilmes" 
+          component={AdiconarFilmes} 
           options={{ headerShown: false }} 
          
         />
