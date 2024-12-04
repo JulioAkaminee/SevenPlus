@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ScrollView, Animated, Image, TouchableOpacity, Easing, TouchableWithoutFeedback } from 'react-native';
 import { Checkbox } from 'react-native-paper';
-import logoSevenPlus from '../../assets/images/logoSevenPlus.png'
+import logoSevenPlus from '../../assets/images/logoSevenPlusPreta.png'
 import userIcon from '../../assets/images/usuarioIcon.png';
 
 export default function AdicionarFilmes({ navigation }) {

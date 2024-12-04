@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, TransitionPresets } from '@react-navigation/stack';
 import Login from './src/pages/login';
 import ForgetPassword from './src/pages/forgetPassword'
 import Register from './src/pages/register'
@@ -9,6 +9,8 @@ import Filmes from './src/pages/filmes';
 import Navegacao from './src/components/barraNavegacao/navegacao';
 import FilmesHorizontal from './src/components/filmesHorizontal/filmesHorizontalAcao';
 import AdiconarFilmes from './src/pages/adicionarFilmes';
+import BemVindo from './src/pages/bemVindo'
+import loginOuCadastrar from './src/pages/loginOuCadastrar';
 
 
 
@@ -19,7 +21,9 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="BemVindo" screenOptions={{
+          ...TransitionPresets.ModalSlideFromBottomIOS, 
+        }}>
         <Stack.Screen 
           name="Login" 
           component={Login} 
@@ -59,6 +63,23 @@ export default function App() {
           options={{ headerShown: false }} 
          
         />
+
+        <Stack.Screen 
+          name="BemVindo" 
+          component={BemVindo} 
+          options={{ headerShown: false }} 
+          
+         
+        />
+
+          <Stack.Screen 
+          name="LoginOuCadastro" 
+          component={loginOuCadastrar} 
+          options={{ headerShown: false }} 
+          
+         
+        />
+
 
 
 

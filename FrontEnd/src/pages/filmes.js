@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 import * as Font from 'expo-font';
 import Navegacao from '../components/barraNavegacao/navegacao';
-import logoSevenPlus from '../../assets/images/logoSevenPlus.png';
+import logoSevenPlus from '../../assets/images/logoSevenPlusPreta.png';
 import userIcon from '../../assets/images/usuarioIcon.png';
 
 export default function Filmes({ navigation }) {

@@ -17,7 +17,7 @@
   import fundoSevenPlus from '../../assets/images/fundoSevenPlus.png';
   import styles from '../styles/homeStyle';
   import Icon from 'react-native-vector-icons/MaterialIcons';
-  import logoSevenPlus from '../../assets/images/logoSevenPlus.png';
+  import logoSevenPlus from '../../assets/images/logoSevenPlusPreta.png';
   import userIcon from '../../assets/images/usuarioIcon.png';
   import Carrossel from '../../src/components/carrossel/carrossel';
   import * as Font from 'expo-font';

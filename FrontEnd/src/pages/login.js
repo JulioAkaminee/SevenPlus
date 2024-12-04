@@ -5,7 +5,7 @@ import * as Font from 'expo-font';
 import styles from '../styles/loginStyle';
 
 import fundoSevenPlus from '../../assets/images/fundoSevenPlus.png';
-import logoSevenPlus from '../../assets/images/logoSevenPlus.png';
+import logoSevenPlus from '../../assets/images/logoSevenPlusPreta.png';
 
 export default function Login({ navigation }) {
   const [fontCarregada, setFontCarregada] = useState(false);
@@ -64,7 +64,8 @@ export default function Login({ navigation }) {
     <SafeAreaView style={styles.container}>
       <ImageBackground style={styles.background} source={fundoSevenPlus}>
         <View style={styles.formContainer}>
-          <Image source={logoSevenPlus} style={styles.logo} />
+          
+          <Image source={logoSevenPlus}  sharedElementId="imagemCompartilhada" style={styles.logo} />
           
           <View style={styles.containerInput}>
             <Text style={styles.labelInput}>Email</Text>
