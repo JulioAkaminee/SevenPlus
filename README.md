@@ -16,7 +16,7 @@ Este é um projeto de **streaming de filmes** criado com **React Native** (para 
 - **Node.js**: Para o back-end, criando uma API RESTful para interagir com o banco de dados e fornecer os dados ao aplicativo.
 - **MySQL**: Para armazenar as informações sobre os filmes, categorias, usuários e dados de autenticação.
 - **Express**: Framework minimalista para construir o servidor Node.js.
-- **JWT (JSON Web Token)**: Para autenticação de usuários.
+
 
 ## Estrutura do Projeto
 
