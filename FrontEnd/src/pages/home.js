@@ -17,7 +17,7 @@
   import fundoSevenPlus from '../../assets/images/fundoSevenPlus.png';
   import styles from '../styles/homeStyle';
   import Icon from 'react-native-vector-icons/MaterialIcons';
-  import logoSevenPlus from '../../assets/images/logoSevenPlusPreta.png';
+  import logoSevenPlus from '../../assets/images/logoSevenPlusBranca.png';
   import userIcon from '../../assets/images/usuarioIcon.png';
   import Carrossel from '../../src/components/carrossel/carrossel';
   import * as Font from 'expo-font';
@@ -64,7 +64,7 @@
         <View style={styles.background} >
               {/* Header */}
               <View style={styles.header}>
-                <Image source={logoSevenPlus} style={styles.logo} />
+                <Image source={logoSevenPlus} style={styles.logoSeven} />
                 <View style={styles.containerUsuario}>
                   <TouchableOpacity onPress={abrirMenuUsuario}>
                     <Image  source={userIcon} style={styles.logo} />
@@ -99,23 +99,8 @@
               <TouchableWithoutFeedback onPress={abrirMenuUsuario}>
                 <View style={styles.fundoMenu} />
               </TouchableWithoutFeedback>
-              <Animated.View 
-            style={[
-              styles.menuUsuario, 
-              {
-                transform: [
-                  {
-                    translateY: animacaoMenu.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [500, 0], 
-                    })
-                  }
-                ]
-              }
-            ]}
-          >
-            
-            
+              <View style={styles.menuUsuario}>
+
                   <TouchableOpacity>
                     <Text style={styles.textMenuUsuario}>Configurações</Text>
                   </TouchableOpacity>
@@ -127,7 +112,8 @@
                     <Text style={styles.textMenuUsuarioExit}>Sair</Text>
                   </TouchableOpacity>
                   
-                  </Animated.View>
+                 
+                  </View>
               </>
               )}
 

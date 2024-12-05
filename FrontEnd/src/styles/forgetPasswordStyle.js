@@ -3,61 +3,77 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: 'black'
+      backgroundColor:'white'
+    
     },
-    background: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      width: '100%',
-    },
-    formContainer:{
-        backgroundColor: '#11111E',
-        margin: 10,
-        padding: 20,
-        borderColor: '#5BC2E7',
-        borderWidth: 2,
-        borderRadius: 10
-    },
-    containerButtonForm:{
-        padding: 10,
-        width: '50%'
-    },
-    buttonForm:{
-        color:'white',
-        backgroundColor: '#5BC2E7',
-        padding: 15,
-        borderRadius: 5,
-        textAlign: 'center',
-        fontFamily: 'MemoirDisplay'
-   
-       
-       
 
-    },
-    textForgetPassword:{
-        color:'white',
-        fontFamily: 'MemoirDisplay',
-        margin: 10
-    },
-    textForgetPasswordTittle:{
-        color:'white',
-        fontFamily: 'MemoirDisplay',
-        margin: 10,
-        fontSize: 20
-    },
-    inputForgetPassword:{
-        backgroundColor:'white',
-        margin: 10,
-        borderRadius: 5,
-        padding: 10,
-        
-    },
-    containerButtons:{
+    containerIconeBntCadastrar: {
         display: 'flex',
-        flexDirection: 'row'
-    }
-   
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        width: '100%'
+      },
+      setaVoltar: {
+        backgroundColor: '#071731',
+        width: 40,
+        height: 40,
+        borderRadius: 200,
+        transform: [{ scaleX: -1 }],
+        color:'white'
+      },
+      BtnCadastrarTop: {
+        backgroundColor: '#071731',
+        padding: 10,
+        borderRadius: 40,
+        width: 120,
+        fontFamily: 'Epilogue-ExtraBold',
+        textAlign: 'center',
+        color:'white'
+      },
+      containerForgetPassword:{
+        paddingTop: 45,
+        paddingHorizontal: 25,
+        backgroundColor:'white',
+        height:'70%'
+      },
+      containerForgetPasswordInput:{
+        backgroundColor:'#071731',
+        height: '30%',
+        borderTopLeftRadius: 40,
+        borderTopRightRadius: 40,
+        display:'flex',
+        alignItems:'center',
+        justifyContent:'center'
+      },
+      containerTextCenter:{
+        height:'100%',
+         display:'flex',
+          alignItems:'center', 
+          justifyContent:"center"
+      },
+      inputTexto: {
+        backgroundColor: 'white',
+        width: '85%',
+        height:54,
+        borderRadius: 5,
+        padding: 15,
+        color: 'black',
+        fontFamily: 'Epilogue-Medium',
+        marginVertical: 10
+      },
+      btnEnviar:{
+        backgroundColor: 'white',
+        width: '85%',
+        height:54,
+        borderRadius: 5,
+        padding: 8,
+        color: 'black',
+        fontFamily: 'Epilogue-ExtraBold',
+        marginVertical: 10,
+        textAlign:'center',
+        fontSize:24
+      }
   });
 
   export default styles;

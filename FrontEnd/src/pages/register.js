@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, SafeAreaView, ImageBackground, StatusBar, Alert } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, SafeAreaView, ImageBackground, StatusBar, Alert, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import fundoSevenPlus from '../../assets/images/fundoSevenPlus.png';
 import styles from '../styles/registerStyle';
@@ -60,8 +60,8 @@ export default function Register({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ImageBackground style={styles.background} source={fundoSevenPlus}>
-        <StatusBar barStyle="dark-content" />
+  
+        {/* <StatusBar barStyle="dark-content" />
         <View style={styles.formContainer}>
           <Text style={styles.title}>Cadastre-se</Text>
           <View>
@@ -125,8 +125,90 @@ export default function Register({ navigation }) {
           <Text style={styles.footerText} onPress={() => navigation.navigate('Login')}>
             Faça seu Login
           </Text>
+        </View> */}
+
+      <View style={styles.containerRegisterText}>
+      <View style={styles.containerIconeBntCadastrar}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Icon name="arrow-right-alt" size={40} style={styles.setaVoltar} />
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Text style={styles.BtnCadastrarTop} onPress={()=> navigation.navigate('Login')}>Entrar</Text>
+              </TouchableOpacity>
+            </View>
+            <Text style={styles.textRegister} >Faça seu Cadastro</Text>
+            <Text style={styles.textFacaCadastro}>Junte-se à nossa comunidade e tenha acesso a um mundo de filmes e séries incríveis, sempre que quiser.</Text>
+
+      </View>
+      <View style={styles.containerRegister}>
+
+            
+            <TextInput
+              placeholder="Digite seu nome completo"
+              style={styles.inputCadastro}
+              value={nome}
+              onChangeText={setNome}
+            />
+       
+
+      
+          
+            <TextInput
+              placeholder="Digite seu email"
+              style={styles.inputCadastro}
+              value={email}
+              onChangeText={setEmail}
+            />
+      
+
+    
+          
+              <View>
+            <View style={styles.inputArea}>
+              <TextInput
+                secureTextEntry={esconderSenha}
+                style={styles.inputCadastro}
+                placeholder="Digite sua senha"
+                value={senha}
+                onChangeText={setSenha}
+              />
+              <TouchableOpacity onPress={() => setesconderSenha(!esconderSenha)}>
+                <Icon style={styles.icon} name="visibility" size={30} color="white" />
+              </TouchableOpacity>
+            </View>
+       
+
+            <View style={styles.inputArea}>
+              <TextInput
+                secureTextEntry={esconderSenhaConfirmacao}
+                style={styles.inputCadastro}
+                placeholder="Confirme sua senha"
+                value={confirmarSenha}
+                onChangeText={setConfirmarSenha}
+              />
+              <TouchableOpacity onPress={() => setesconderSenhaConfirmacao(!esconderSenhaConfirmacao)}>
+                <Icon style={styles.icon} name="visibility" size={30} color="white" />
+              </TouchableOpacity>
+            </View>
+          </View>
+
+          <TouchableOpacity style={styles.containerBtnCadastrar} onPress={registrarUsuario}>
+            <Text style={styles.btnCadastrar}>Cadastrar</Text>
+          </TouchableOpacity>
+
+        <View style={styles.containerRedesSociais}>
+              <TouchableOpacity style={styles.btnEntrarRedesSociais} onPress={() => Alert.alert('Erro','Ainda em processo de desenvolvimento desta funcionalidade.')}>
+                <Image style={styles.iconRedeSocial} source={require('../../assets/images/google.png')} />
+                <Text style={styles.textoBotao} >Continuar com Google</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.btnEntrarRedesSociais} onPress={() => Alert.alert('Erro','Ainda em processo de desenvolvimento desta funcionalidade.')}  >
+              <Image style={styles.iconRedeSocial} source={require('../../assets/images/facebook.png')} />
+                <Text style={styles.textoBotao}>Continuar com Facebook</Text>
+              </TouchableOpacity>
+            </View>
         </View>
-      </ImageBackground>
+
+  
     </SafeAreaView>
   );
 }

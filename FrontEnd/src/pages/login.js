@@ -3,6 +3,7 @@ import { SafeAreaView, View, Text, Image, ImageBackground, TextInput, TouchableO
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as Font from 'expo-font';
 import styles from '../styles/loginStyle';
+import CarregarFontes from './carregarFontes';
 
 import fundoSevenPlus from '../../assets/images/fundoSevenPlus.png';
 import logoSevenPlus from '../../assets/images/logoSevenPlusPreta.png';
@@ -62,56 +63,72 @@ export default function Login({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <ImageBackground style={styles.background} source={fundoSevenPlus}>
-        <View style={styles.formContainer}>
-          
-          <Image source={logoSevenPlus}  sharedElementId="imagemCompartilhada" style={styles.logo} />
-          
-          <View style={styles.containerInput}>
-            <Text style={styles.labelInput}>Email</Text>
-            <TextInput
-              style={styles.inputTexto}
-              placeholder="Digite seu email"
-              onChangeText={(text) => setEmail(text)}
-              value={email}
-            />
-          </View>
-
-          <View style={styles.containerInput}>
-            <Text style={styles.labelInput}>Senha</Text>
-            <View style={styles.inputArea}>
-              <TextInput
-                secureTextEntry={esconderSenha}
-                style={styles.inputTexto}
-                placeholder="Digite sua senha"
-                onChangeText={(text) => setSenha(text)}
-                value={senha}
-              />
-              <TouchableOpacity onPress={() => setEsconderSenha(!esconderSenha)}>
-                <Icon style={styles.icon} name={esconderSenha ? "visibility-off" : "visibility"} size={30} color="white" />
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          <TouchableOpacity style={styles.containerBtnEntrar} onPress={realizarLogin}>
-            <Text style={styles.btnEntrar}>ENTRAR</Text>
+ 
+     
+     <CarregarFontes>
+       <View style={styles.containerLoginText}>
+             {/* Container icone e btn cadastro */}
+        <View>
+          <View style={styles.containerIconeBntCadastrar}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Icon name="arrow-right-alt" size={40} style={styles.setaVoltar} />
           </TouchableOpacity>
           <TouchableOpacity>
-            <Text
-              style={styles.forgetPassword}
-              onPress={() => navigation.navigate('Esqueci-senha')}
-            >
-              Esqueci a senha
-            </Text>
-          </TouchableOpacity>
+            <Text style={styles.BtnCadastrarTop} onPress={()=> navigation.navigate('Cadastro')}>Cadastre-se</Text>
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.textLogin} >Faça seu login</Text>
+          <Text style={styles.textWelcomeLogin}>Entre com sua conta e tenha acesso ao melhor catálogo de filmes e séries, criado especialmente para você.</Text>
         </View>
+       </View>
+       
+       <View style={styles.containerLogin}>
+    
+      
+              <TextInput
+                style={styles.inputTexto}
+                placeholder="Email"
+                onChangeText={(text) => setEmail(text)}
+                value={email}
+              />
+           
+        
+              <View style={styles.inputArea}>
+                <TextInput
+                  secureTextEntry={esconderSenha}
+                  style={styles.inputTexto}
+                  placeholder="Senha"
+                  onChangeText={(text) => setSenha(text)}
+                  value={senha}
+                />
+                <TouchableOpacity onPress={() => setEsconderSenha(!esconderSenha)}>
+                  <Icon style={styles.icon} name={esconderSenha ? "visibility-off" : "visibility"} size={30} color="white" />
+                </TouchableOpacity>
+            
+            </View>
+            <View style={styles.containerForgetPassword}>
+              <TouchableOpacity>
+                <Text style={styles.forgetPassword} onPress={() => navigation.navigate('Esqueci-senha')}>Esqueci a senha</Text>
+              </TouchableOpacity>
+            </View>
 
-        <View style={styles.footerContainer}>
-          <Text style={styles.footerText} onPress={() => navigation.navigate('Cadastro')}>
-            Cadastre-se agora!
-          </Text>
-        </View>
-      </ImageBackground>
+            <TouchableOpacity style={styles.containerBtnEntrar} onPress={realizarLogin}>
+              <Text style={styles.btnEntrar}>Entrar</Text>
+            </TouchableOpacity>
+
+            <View style={styles.containerRedesSociais}>
+              <TouchableOpacity style={styles.btnEntrarRedesSociais}>
+                <Image style={styles.iconRedeSocial} source={require('../../assets/images/google.png')} />
+                <Text style={styles.textoBotao} >Continuar com Google</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.btnEntrarRedesSociais} >
+              <Image style={styles.iconRedeSocial} source={require('../../assets/images/facebook.png')} />
+                <Text style={styles.textoBotao}>Continuar com Facebook</Text>
+              </TouchableOpacity>
+            </View>
+   
+       </View>
+     </CarregarFontes>
     </SafeAreaView>
   );
 }

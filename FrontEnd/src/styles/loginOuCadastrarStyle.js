@@ -13,14 +13,15 @@ const styles = StyleSheet.create({
     },
     containerInfos:{
         backgroundColor:'#071731',
-        height:'52%',
+        height:'58%',
         borderTopLeftRadius: 40,
         borderTopRightRadius: 40,
+      
      
       
     },
     containerImage:{
-        height:'48%',
+        height:'42%',
         backgroundColor:'white',
         display:'flex',
         justifyContent:'center',
@@ -31,16 +32,16 @@ const styles = StyleSheet.create({
         color:'white',
         marginLeft:30,
         fontSize: 30,
-        marginTop: 15
+        marginTop: 25
     },
     textoBemVindo:{
         color:'white',
         marginLeft:30,
         fontSize: 16,
-        marginTop: 15,
+        marginTop: 10,
         fontFamily: 'Epilogue-Medium',
         width:"80%",
-        lineHeight: 20
+        lineHeight: 23
     },
     textoPipoca:{
         fontFamily:'Epilogue-ExtraBold',
@@ -48,13 +49,13 @@ const styles = StyleSheet.create({
         width:"80%",
         marginLeft:30,
         fontSize: 16,
-        marginTop: 15,
+        marginTop: 10,
     },
     containerButtons:{
       display:'flex',
       flexDirection:'row',
       marginLeft:10,
-      marginTop: 15,
+      marginTop: 20,
       justifyContent:'space-around'
   
        
@@ -70,7 +71,8 @@ const styles = StyleSheet.create({
         paddingRight:20,
         fontFamily:'Epilogue-ExtraBold',
         borderRadius: 10,
-        fontSize:15        
+        fontSize:15,
+        marginRight:15       
     },
     btnEntrar:{
         color:'white',
@@ -83,7 +85,9 @@ const styles = StyleSheet.create({
         paddingRight:20,
         fontFamily:'Epilogue-ExtraBold',
         borderRadius: 10,
-        fontSize:15        
+        fontSize:15,
+        
+ 
     }
    
 })
