@@ -12,7 +12,8 @@
     ScrollView,
     ImageBackground,
     Animated,
-    Easing
+    Easing,
+    Alert
   } from 'react-native';
   import fundoSevenPlus from '../../assets/images/fundoSevenPlus.png';
   import styles from '../styles/homeStyle';
@@ -59,6 +60,10 @@
       return <Text>Carregando fonte...</Text>;
     }
 
+    const alertEmDesenvolvimento = () =>{
+      Alert.alert('Atenção','Esta funcionalidade esta em desenvolvimento')
+    }
+
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.background} >
@@ -99,16 +104,28 @@
               <TouchableWithoutFeedback onPress={abrirMenuUsuario}>
                 <View style={styles.fundoMenu} />
               </TouchableWithoutFeedback>
-              <View style={styles.menuUsuario}>
 
-                  <TouchableOpacity>
+              <View style={styles.menuUsuario}>
+                  <TouchableOpacity onPress={alertEmDesenvolvimento} style={styles.containerLogoMenuUser}>
+                      <Image  source={userIcon} style={styles.logoMenuUsuario} />
+                      <Text style={styles.textNameUsuario}>Júlio Akamine</Text>
+               
+                  </TouchableOpacity>
+
+                  <TouchableOpacity  onPress={alertEmDesenvolvimento} style={styles.containerTextMenuUsuario}>
+                    <Image source={require('../../assets/images/config-icon.png')}/>
                     <Text style={styles.textMenuUsuario}>Configurações</Text>
                   </TouchableOpacity>
               
-                  <TouchableOpacity onPress={() => navigation.navigate('AdicionarFilmes')}>
-                    <Text style={styles.textMenuUsuario}>Adicionar Filmes</Text>
+                  <TouchableOpacity style={styles.containerTextMenuUsuario} onPress={() => navigation.navigate('AdicionarFilmes')}>
+                    <Image source={require('../../assets/images/add-icon.png')}/>
+                    <Text style={styles.textMenuUsuario}>Adicionar Filme</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+                  <TouchableOpacity style={styles.containerTextMenuUsuario} onPress={alertEmDesenvolvimento}>
+                    <Image source={require('../../assets/images/favoritos-icon.png')}/>
+                    <Text style={styles.textMenuUsuario}>Favoritos</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity  onPress={() => navigation.navigate('Login')}>
                     <Text style={styles.textMenuUsuarioExit}>Sair</Text>
                   </TouchableOpacity>
                   

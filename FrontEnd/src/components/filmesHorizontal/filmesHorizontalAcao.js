@@ -78,7 +78,7 @@ export default function FilmesHorizontalAcao({ navigation }) {
               <TouchableOpacity onPress={() => abrirModal(item)}>
                 <View style={styles.filmeContainer}>
                   <Image style={styles.imagem} source={{ uri: item.capa }} />
-                  <Text style={styles.titulo}>{item.titulo}</Text>
+              
                 </View>
               </TouchableOpacity>
             )}

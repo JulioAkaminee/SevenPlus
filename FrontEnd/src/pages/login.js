@@ -61,6 +61,10 @@ export default function Login({ navigation }) {
     return <Text>Carregando fonte...</Text>;
   }
 
+  const alertEmDesenvolvimento = () =>{
+    Alert.alert('Atenção','Esta funcionalidade esta em desenvolvimento')
+  }
+
   return (
     <SafeAreaView style={styles.container}>
  
@@ -117,11 +121,11 @@ export default function Login({ navigation }) {
             </TouchableOpacity>
 
             <View style={styles.containerRedesSociais}>
-              <TouchableOpacity style={styles.btnEntrarRedesSociais}>
+              <TouchableOpacity style={styles.btnEntrarRedesSociais} onPress={alertEmDesenvolvimento}>
                 <Image style={styles.iconRedeSocial} source={require('../../assets/images/google.png')} />
                 <Text style={styles.textoBotao} >Continuar com Google</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.btnEntrarRedesSociais} >
+              <TouchableOpacity style={styles.btnEntrarRedesSociais} onPress={alertEmDesenvolvimento} >
               <Image style={styles.iconRedeSocial} source={require('../../assets/images/facebook.png')} />
                 <Text style={styles.textoBotao}>Continuar com Facebook</Text>
               </TouchableOpacity>

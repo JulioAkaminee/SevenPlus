@@ -16,7 +16,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="BemVindo"
+        initialRouteName="Home"
         screenOptions={{
           ...TransitionPresets.ModalSlideFromBottomIOS, 
           transitionSpec: {

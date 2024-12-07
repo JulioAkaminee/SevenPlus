@@ -78,7 +78,7 @@ export default function FilmesHorizontalDrama({ navigation }) {
               <TouchableOpacity onPress={() => abrirModal(item)}>
                 <View style={styles.filmeContainer}>
                   <Image style={styles.imagem} source={{ uri: item.capa }} />
-                  <Text style={styles.titulo}>{item.titulo}</Text>
+                
                 </View>
               </TouchableOpacity>
             )}
@@ -101,7 +101,7 @@ export default function FilmesHorizontalDrama({ navigation }) {
                   videoId={filmeSelecionado.url_video.split('v=')[1]} // Extraindo o ID do vídeo
                   height={200}
                   width="100%"
-                  play={false} // Se quiser iniciar o vídeo automaticamente, altere para true
+                  play={true} // Se quiser iniciar o vídeo automaticamente, altere para true
                 />
               )}
               <Text style={styles.modalTitulo}>{filmeSelecionado.titulo}</Text>
