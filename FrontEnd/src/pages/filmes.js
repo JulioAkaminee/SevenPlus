@@ -13,12 +13,15 @@ import {
   ImageBackground,
   Animated,
   Easing,
-  FlatList
+  FlatList, 
+  Modal
 } from 'react-native';
+import YouTubeIframe from 'react-native-youtube-iframe';
 import * as Font from 'expo-font';
 import Navegacao from '../components/barraNavegacao/navegacao';
 import logoSevenPlus from '../../assets/images/logoSevenPlusPreta.png';
 import userIcon from '../../assets/images/usuarioIcon.png';
+import  Header from '../components/header/header.js'
 
 export default function Filmes({ navigation }) {
   const [fontCarregada, setFontCarregada] = useState(false);
@@ -26,8 +29,8 @@ export default function Filmes({ navigation }) {
   const [carregamento, setCarregamento] = useState(true);
   const [menuUsuarioVisivel, setMenuUsuarioVisivel] = useState(false);
   const [animacaoMenu, setAnimacaoMenu] = useState(new Animated.Value(0)); //inicia com opacidade 0
- 
-
+  const [filmeSelecionado, setFilmeSelecionado] = useState(null);
+  const [modalVisivel, setModalVisivel] = useState(false);
 
   //Função para abrir ou fechar o menu do usuario
   const abrirMenuUsuario = () =>{
@@ -40,6 +43,16 @@ export default function Filmes({ navigation }) {
       useNativeDriver:true,
     }).start();
 
+  };
+
+  const abrirModal = (filme) => {
+    setFilmeSelecionado(filme);
+    setModalVisivel(true);
+  };
+
+  const fecharModal = () => {
+    setModalVisivel(false);
+    setFilmeSelecionado(null);
   };
 
   // Carregar a fonte personalizada
@@ -86,71 +99,65 @@ export default function Filmes({ navigation }) {
   // Renderiza a lista de filmes
   return (
     <>
-     <View style={styles.header}>
-                <Image source={logoSevenPlus} style={styles.logo} />
-                <View style={styles.containerUsuario}>
-                  <TouchableOpacity onPress={abrirMenuUsuario}>
-                    <Image  source={userIcon} style={styles.logo} />
-                  </TouchableOpacity>
-                
-                </View>
-      
-      
-              </View>
+    <Header navigation={navigation}/>
      <SafeAreaView style={styles.container}>
       <View style={styles.containerLista}>
-          <FlatList
-            data={filmes} // Dados recebidos para a lista
-            keyExtractor={(item) => item.id.toString()} // Usa o id como chave única
-            showsVerticalScrollIndicator={false}
-            renderItem={({ item }) => (
-              <View style={styles.filmeContainer}>
-                <Image style={styles.imagem} source={{ uri: item.capa }} />
-                <Text style={styles.titulo}>{item.titulo}</Text>
-                <Text style={styles.categoria}>Categoria: {item.categorias}</Text>
-                <Text style={styles.descricao}>{item.descricao}</Text>
-              </View>
-            )}
-          />
+      <FlatList
+  data={filmes}
+  key={(2).toString()} // Atribui uma chave fixa com base no número de colunas (2 neste caso)
+  keyExtractor={(item) => item.id.toString()}
+  showsVerticalScrollIndicator={false}
+  numColumns={2} // Define o número de colunas (2 por linha)
+  columnWrapperStyle={{
+    justifyContent: 'space-between', // Espaçamento uniforme entre os itens
+    marginBottom: 15, // Espaçamento entre as linhas
+  }}
+  renderItem={({ item }) => (
+    <TouchableOpacity style={styles.filmeContainer} onPress={() => abrirModal(item)}>
+      <View  >
+        <Image style={styles.imagem} source={{ uri: item.capa }} />
       </View>
+    </TouchableOpacity>
+  )}
+/>
+      </View>
+
+      {filmeSelecionado && (
+        <Modal
+          visible={modalVisivel}
+          animationType="slide"
+          transparent={true}
+          onRequestClose={fecharModal}
+        >
+          <View style={styles.modalOverlay}>
+            <View style={styles.modalContainer}>
+              {/* Exibindo o vídeo com YouTubeIframe */}
+              {filmeSelecionado.url_video && (
+                <YouTubeIframe
+                  videoId={filmeSelecionado.url_video.split('v=')[1]} // Extraindo o ID do vídeo
+                  height={200}
+                  width="100%"
+                  play={true} // Se quiser iniciar o vídeo automaticamente, altere para true
+                />
+              )}
+              <Text style={styles.modalTitulo}>{filmeSelecionado.titulo}</Text>
+              
+              <Text style={styles.modalDescricao}>{filmeSelecionado.descricao}</Text>
+              <Text style={styles.modalCategoria}>Categoria: {filmeSelecionado.categorias}</Text>
+
+
+              <TouchableOpacity style={styles.fecharModal} onPress={fecharModal}>
+                <Text style={styles.fecharModalTexto}>Fechar</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
+      )}
     </SafeAreaView>
     <Navegacao navigation={navigation}/>
-    {menuUsuarioVisivel && (
-              <>
-              <TouchableWithoutFeedback onPress={abrirMenuUsuario}>
-                <View style={styles.fundoMenu} />
-              </TouchableWithoutFeedback>
-              <Animated.View 
-            style={[
-              styles.menuUsuario, 
-              {
-                transform: [
-                  {
-                    translateY: animacaoMenu.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [500, 0], 
-                    })
-                  }
-                ]
-              }
-            ]}
-          >
-            
-            
-                  <TouchableOpacity>
-                    <Text style={styles.textMenuUsuario}>Configurações</Text>
-                  </TouchableOpacity>
-                
-                  <TouchableOpacity onPress={() => navigation.navigate('AdicionarFilmes')}>
-                    <Text style={styles.textMenuUsuario}>Adicionar Filmes</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                    <Text style={styles.textMenuUsuarioExit}>Sair</Text>
-                  </TouchableOpacity>
-                  
-                  </Animated.View>
-              </>
-              )}
+
+
+    
     </>
    
   );
@@ -170,7 +177,7 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     display:'flex',
     justifyContent: 'center',
-    alignItems:'center'
+
   },
   carregandoTexto: {
     fontSize: 18,
@@ -180,17 +187,15 @@ const styles = StyleSheet.create({
     color: '#555',
   },
   filmeContainer: {
-    backgroundColor: '#1E1E26',
     borderRadius: 8,
-    marginBottom: 15,
-    padding: 10,
-
-    
-  
+    padding: 5,
+    flex: 1, // Permite que os itens ocupem igualmente o espaço da coluna
+    marginHorizontal: 5, // Espaçamento lateral entre os itens
   },
+  
   imagem: {
     width: '100%',
-    height: 200,
+    height: 230,
     marginBottom: 10,
     objectFit:'contain'
   },
@@ -283,5 +288,48 @@ fundoMenu: {
     height: 70, 
     
    
-}
+},
+modalOverlay: {
+  flex: 1,
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+},
+modalContainer: {
+  backgroundColor: 'white',
+  borderRadius: 5,
+  padding: 20,
+  width: '80%',
+  alignItems: 'center',
+},
+modalTitulo: {
+  fontSize: 24,
+  fontWeight: 'bold',
+  textAlign: 'center',
+},
+modalImagem: {
+  width: '100%',
+  height: 200,
+  marginBottom: 5,
+  objectFit: 'contain',
+},
+modalDescricao: {
+  fontSize: 16,
+  textAlign: 'center',
+  marginBottom: 10,
+},
+modalCategoria: {
+  fontSize: 16,
+  textAlign: 'center',
+  marginBottom: 20,
+},
+fecharModal: {
+  backgroundColor: '#007bff',
+  padding: 10,
+  borderRadius: 5,
+},
+fecharModalTexto: {
+  color: 'white',
+  fontSize: 16,
+},
 });

@@ -61,71 +61,7 @@ export default function Register({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
   
-        {/* <StatusBar barStyle="dark-content" />
-        <View style={styles.formContainer}>
-          <Text style={styles.title}>Cadastre-se</Text>
-          <View>
-            <Text style={styles.textLabelRegister}>Nome Completo</Text>
-            <TextInput
-              placeholder="Digite seu nome completo"
-              style={styles.inputCadastro}
-              value={nome}
-              onChangeText={setNome}
-            />
-          </View>
-
-          <View>
-            <Text style={styles.textLabelRegister}>Email</Text>
-            <TextInput
-              placeholder="Digite seu email"
-              style={styles.inputCadastro}
-              value={email}
-              onChangeText={setEmail}
-            />
-          </View>
-
-          <View>
-            <Text style={styles.textLabelRegister}>Senha</Text>
-            <View style={styles.inputArea}>
-              <TextInput
-                secureTextEntry={esconderSenha}
-                style={styles.inputCadastro}
-                placeholder="Digite sua senha"
-                value={senha}
-                onChangeText={setSenha}
-              />
-              <TouchableOpacity onPress={() => setesconderSenha(!esconderSenha)}>
-                <Icon style={styles.icon} name="visibility" size={30} color="white" />
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          <View>
-            <Text style={styles.textLabelRegister}>Confirmação de Senha</Text>
-            <View style={styles.inputArea}>
-              <TextInput
-                secureTextEntry={esconderSenhaConfirmacao}
-                style={styles.inputCadastro}
-                placeholder="Digite sua senha"
-                value={confirmarSenha}
-                onChangeText={setConfirmarSenha}
-              />
-              <TouchableOpacity onPress={() => setesconderSenhaConfirmacao(!esconderSenhaConfirmacao)}>
-                <Icon style={styles.icon} name="visibility" size={30} color="white" />
-              </TouchableOpacity>
-            </View>
-          </View>
-
-          <TouchableOpacity style={styles.containerButton} onPress={registrarUsuario}>
-            <Text style={styles.buttonCadastrar}>CADASTRAR</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={styles.footerContainer}>
-          <Text style={styles.footerText} onPress={() => navigation.navigate('Login')}>
-            Faça seu Login
-          </Text>
-        </View> */}
+      
 
       <View style={styles.containerRegisterText}>
       <View style={styles.containerIconeBntCadastrar}>

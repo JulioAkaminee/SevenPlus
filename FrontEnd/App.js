@@ -9,6 +9,7 @@ import Filmes from './src/pages/filmes';
 import AdiconarFilmes from './src/pages/adicionarFilmes';
 import BemVindo from './src/pages/bemVindo';
 import loginOuCadastrar from './src/pages/loginOuCadastrar';
+import Header from './src/components/header/header';
 
 const Stack = createStackNavigator();
 
@@ -16,7 +17,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName="BemVindo"
         screenOptions={{
           ...TransitionPresets.ModalSlideFromBottomIOS, 
           transitionSpec: {
@@ -45,6 +46,8 @@ export default function App() {
         <Stack.Screen name="AdicionarFilmes" component={AdiconarFilmes} options={{ headerShown: false }} />
         <Stack.Screen name="BemVindo" component={BemVindo} options={{ headerShown: false }} />
         <Stack.Screen name="LoginOuCadastro" component={loginOuCadastrar} options={{ headerShown: false }} />
+        <Stack.Screen name="header" component={Header} options={{ headerShown: false }} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

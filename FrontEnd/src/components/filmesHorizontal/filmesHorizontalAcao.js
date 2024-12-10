@@ -143,11 +143,12 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     padding: 10,
     shadowColor: '#000',
-    width: 250,
+    width: 170,
+
   },
   imagem: {
     width: '100%',
-    height: 150,
+    height: 220,
     objectFit: 'contain',
   },
   titulo: {

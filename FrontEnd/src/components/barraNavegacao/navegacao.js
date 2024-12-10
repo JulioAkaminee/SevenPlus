@@ -8,7 +8,7 @@ export default function Navegacao({ navigation }) {
     <View style={styles.footer}>
       <TouchableOpacity onPress={() => navigation.navigate('Home')} style={styles.containerIconFooter}>
         <Icon name="home-outline" size={25} color="white" />
-        <Text style={{ color: 'white', fontSize: 12, fontFamily:'Epilogue-Medium' }}>Home</Text>
+        <Text style={{ color: 'white', fontSize: 12, fontFamily:'Epilogue-Medium' }}>Home </Text>
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -23,3 +23,4 @@ export default function Navegacao({ navigation }) {
     </View>
   );
 }
+

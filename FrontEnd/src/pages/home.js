@@ -26,7 +26,8 @@
   import FilmesHorizontalAcao from '../components/filmesHorizontal/filmesHorizontalAcao';
   import FilmesHorizontalDrama from '../components/filmesHorizontal/filmesHorizontalDrama';
   import FilmesHorizontalRomance from '../components/filmesHorizontal/filmesHorizontalRomance';
-  export default function Login({ navigation }) {
+  import  Header from '../components/header/header.js'
+  export default function Home({ navigation }) {
     const [menuVisivel, setMenuVisivel] = useState(false);
     const [menuUsuarioVisivel, setMenuUsuarioVisivel] = useState(false);
     const [animacaoMenu, setAnimacaoMenu] = useState(new Animated.Value(0)); //inicia com opacidade 0
@@ -66,19 +67,9 @@
 
     return (
       <SafeAreaView style={styles.container}>
+              <Header navigation={navigation}/>
         <View style={styles.background} >
-              {/* Header */}
-              <View style={styles.header}>
-                <Image source={logoSevenPlus} style={styles.logoSeven} />
-                <View style={styles.containerUsuario}>
-                  <TouchableOpacity onPress={abrirMenuUsuario}>
-                    <Image  source={userIcon} style={styles.logo} />
-                  </TouchableOpacity>
-                
-                </View>
-      
-      
-              </View>
+            
               <ScrollView>
               {/* Componente Carrossel */}
               <Carrossel/>

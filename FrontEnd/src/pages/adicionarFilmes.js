@@ -3,6 +3,8 @@ import { View, Text, TextInput, Button, StyleSheet, ScrollView, Animated, Image,
 import { Checkbox } from 'react-native-paper';
 import logoSevenPlus from '../../assets/images/logoSevenPlusPreta.png'
 import userIcon from '../../assets/images/usuarioIcon.png';
+import Header from '../components/header/header';
+import Navegacao from '../components/barraNavegacao/navegacao';
 
 export default function AdicionarFilmes({ navigation }) {
     const [menuVisivel, setMenuVisivel] = useState(false);
@@ -98,17 +100,7 @@ export default function AdicionarFilmes({ navigation }) {
 
     return (
         <>
-            <View style={styles.header}>
-                <TouchableOpacity onPress={()=> navigation.navigate('Home')}>
-
-                <Image source={logoSevenPlus} style={styles.logo} />
-                </TouchableOpacity>
-                <View style={styles.containerUsuario}>
-                    <TouchableOpacity onPress={abrirMenuUsuario}>
-                        <Image source={userIcon} style={styles.logo} />
-                    </TouchableOpacity>
-                </View>
-            </View>
+           <Header navigation={navigation}/>
 
             <ScrollView contentContainerStyle={styles.container}>
                 <Text style={styles.title}>Cadastro de Filmes</Text>
@@ -154,66 +146,39 @@ export default function AdicionarFilmes({ navigation }) {
                 />
 
                 <Text style={styles.subtitle}>Categorias</Text>
-                {categorias.map(categoria => (
-                    <View key={categoria.id} style={styles.checkboxContainer}>
-                        <Checkbox
-                            status={form.categorias.includes(categoria.id) ? 'checked' : 'unchecked'}
-                            onPress={() => toggleCategoria(categoria.id)}
-                        />
-                        <Text>{categoria.nome}</Text>
-                    </View>
-                ))}
-
+                <ScrollView horizontal={true} style={{ borderRadius: 15 }}>
+    {categorias.map(categoria => (
+        <View key={categoria.id} style={styles.containerCategoria}>
+            <View style={styles.checkboxContainer}>
+                <Checkbox
+                    status={form.categorias.includes(categoria.id) ? 'checked' : 'unchecked'}
+                    onPress={() => toggleCategoria(categoria.id)}
+                />
+                <Text style={styles.nameCategoria}>{categoria.nome}</Text>
+            </View>
+        </View>
+    ))}
+</ScrollView>
                 <TouchableOpacity onPress={handleSubmit}>
                     <Text style={styles.btnCadastrar}>Cadastrar</Text>
                 </TouchableOpacity>
             </ScrollView>
+            <Navegacao navigation={navigation}/>
 
-            {menuUsuarioVisivel && (
-                <>
-                    <TouchableWithoutFeedback onPress={abrirMenuUsuario}>
-                        <View style={styles.fundoMenu} />
-                    </TouchableWithoutFeedback>
-                    <Animated.View
-                        style={[
-                            styles.menuUsuario,
-                            {
-                                transform: [
-                                    {
-                                        translateY: animacaoMenu.interpolate({
-                                            inputRange: [0, 1],
-                                            outputRange: [500, 0],
-                                        })
-                                    }
-                                ]
-                            }
-                        ]}
-                    >
-                        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-                            <Text style={styles.textMenuUsuario}>Home</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity>
-                            <Text style={styles.textMenuUsuario}>Configurações</Text>
-                        </TouchableOpacity>
-                     
-                       
-                        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                            <Text style={styles.textMenuUsuarioExit}>Sair</Text>
-                        </TouchableOpacity>
-                    </Animated.View>
-                </>
-            )}
+           
         </>
     );
 }
 
 const styles = StyleSheet.create({
-    container: { padding: 20 },
-    title: { fontSize: 24, fontWeight: 'bold', marginBottom: 20 },
-    subtitle: { fontSize: 18, fontWeight: 'bold', marginTop: 20 },
-    input: { borderWidth: 1, padding: 10, marginBottom: 15, borderRadius: 5 },
-    inputError: { borderColor: 'red' },
-    checkboxContainer: { flexDirection: 'row', alignItems: 'center', marginBottom: 10 },
+    container: { padding: 20, backgroundColor: '#222831', height:'100%' },
+    nameCategoria:{color:'black', fontFamily:'Epilogue-Medium'},
+    title: { fontSize: 24, fontWeight: 'bold', marginBottom: 20, color:'white' },
+    containerCategoria:{backgroundColor:'white', display:'flex', justifyContent:'center',  },
+    subtitle: { fontSize: 18, fontWeight: 'bold', marginTop: 20, color:'white' },
+    input: { borderWidth: 1, padding: 10, marginBottom: 15, borderRadius: 5, color:'white', backgroundColor:'white' },
+    inputError: { borderColor: 'white' },
+    checkboxContainer: { flexDirection: 'row', alignItems: 'center', marginHorizontal: 10, height:70, },
     logo:{
         width: 70,
         height: 70, 
@@ -279,7 +244,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 25,
         margin: 10,
-        color: 'black'
+     
     },
     fundoMenu: {
         position: 'absolute',
