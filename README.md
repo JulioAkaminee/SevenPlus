@@ -25,9 +25,6 @@ O projeto é dividido em duas partes principais:
 1. **Front-End (Mobile - React Native)**: O aplicativo mobile desenvolvido com React Native.
 2. **Back-End (Servidor Node.js + MySQL)**: API que lida com a lógica de negócios e banco de dados.
 
-### Estrutura de Pastas
-
-- a fazer
 
   
 ## Pré-Requisitos
@@ -40,6 +37,4 @@ Antes de começar, verifique se você tem as seguintes ferramentas instaladas:
 - **React Native CLI** - [Documentação](https://reactnative.dev/docs/environment-setup) (se preferir não usar o Expo)
 - **Postman** (opcional, para testar a API)
 
-## Como Rodar o Projeto
 
-a fazer
