@@ -23,9 +23,7 @@
   import Carrossel from '../../src/components/carrossel/carrossel';
   import * as Font from 'expo-font';
   import Navegacao from '../components/barraNavegacao/navegacao';
-  import FilmesHorizontalAcao from '../components/filmesHorizontal/filmesHorizontalAcao';
-  import FilmesHorizontalDrama from '../components/filmesHorizontal/filmesHorizontalDrama';
-  import FilmesHorizontalRomance from '../components/filmesHorizontal/filmesHorizontalRomance';
+  import FilmesHorizontal from '../components/filmes/filmes.js';
   import  Header from '../components/header/header.js'
   export default function Home({ navigation }) {
     const [menuVisivel, setMenuVisivel] = useState(false);
@@ -77,13 +75,7 @@
 
               {/* Filmes */}
         
-                <Text style={styles.textCategoriaFilme}>Ação</Text>
-                <FilmesHorizontalAcao/>
-                <Text style={styles.textCategoriaFilme}>Drama</Text>
-                <FilmesHorizontalDrama />
-                <Text style={styles.textCategoriaFilme}>Romance</Text>
-                <FilmesHorizontalRomance/>
-              
+              <FilmesHorizontal/>
                 </ScrollView>
       
 
