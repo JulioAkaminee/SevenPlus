@@ -32,7 +32,7 @@ export default function ForgetPassword({ navigation }) {
     }
 
     try {
-      const response = await fetch('http://10.0.0.179:3008/forgot-password', {
+      const response = await fetch('http://10.0.2.2:3050/forgot-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -23,7 +23,7 @@ export default function FilmesHorizontal({ navigation }) {
 
   const carregarFilmes = async () => {
     try {
-      const resposta = await fetch('http://10.0.0.179:3010/api/filmes');
+      const resposta = await fetch('http://10.0.2.2:3050/api/filmes');
       const dadosRecebidos = await resposta.json();
       console.log('Dados recebidos:', dadosRecebidos);  
       setFilmes(dadosRecebidos);

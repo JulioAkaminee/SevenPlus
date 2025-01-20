@@ -75,7 +75,7 @@ export default function Filmes({ navigation }) {
   useEffect(() => {
     const pegarFilmes = async () => {
       try {
-        const resposta = await fetch('http://10.0.0.179:3010/api/filmes'); // URL da API de filmes
+        const resposta = await fetch('http://10.0.2.2:3050/api/filmes'); // URL da API de filmes
         const dadosRecebidos = await resposta.json(); // Converte a resposta em JSON
         setFilmes(dadosRecebidos); // Atualiza o estado dos filmes
         setCarregamento(false); // Finaliza o estado de carregamento

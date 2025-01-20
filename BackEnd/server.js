@@ -7,6 +7,7 @@ const loginRouter = require('./routes/login');  // Rota de login
 const filmesRouter = require('./routes/filmes')
 const adicionarFilmesRouter = require('./routes/adicionarFilmes')
 const app = express();
+const porta = 3050
 
 // Middleware para o corpo da requisição (JSON)
 app.use(express.json());
@@ -22,6 +23,6 @@ app.use('/adicionarfilmes', adicionarFilmesRouter)
 
 
 // Iniciar o servidor na porta 3010
-app.listen(3010, '0.0.0.0', () => {
-  console.log('Servidor rodando na porta 3010');
+app.listen(porta, () => {
+  console.log(`Servidor rodando na porta ${porta}`);
 });

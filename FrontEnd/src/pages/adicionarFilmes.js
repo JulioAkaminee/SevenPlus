@@ -24,7 +24,7 @@ export default function AdicionarFilmes({ navigation }) {
     const [showDatePicker, setShowDatePicker] = useState(false);
 
     useEffect(() => {
-        fetch('http://10.0.0.179:3010/adicionarfilmes/categorias')
+        fetch('http://10.0.2.2:3050/adicionarfilmes/categorias')
             .then(response => response.json())
             .then(data => setCategorias(data))
             .catch(err => console.error('Erro:', err));
@@ -46,7 +46,7 @@ export default function AdicionarFilmes({ navigation }) {
     const handleSubmit = () => {
         if (!validarFormulario()) return;
 
-        fetch('http://10.0.0.179:3010/adicionarfilmes', {
+        fetch('http://10.0.2.2:3050/adicionarfilmes', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

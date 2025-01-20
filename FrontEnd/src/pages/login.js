@@ -33,7 +33,7 @@ export default function Login({ navigation }) {
     }
 
     try {
-      const response = await fetch('http://10.0.0.179:3010/login', {
+      const response = await fetch('http://10.0.2.2:3050/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
